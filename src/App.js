@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import{Navbar,Nav,Container,NavDropdown} from 'react-bootstrap';
+import Instructions from './components/Instructions/Instructions';
 function App() {
   return (
     <div className="App">
@@ -36,14 +36,14 @@ function App() {
       </Navbar>
       
 
+      <Instructions className="mx-3" />
 
 
-
-    <Navbar bg="dark" variant="dark" fixed="bottom">
-    <Container className="flex-row justify-content-center">
-      <h5 className='text-success text-center'>footer</h5>
-    </Container>
-  </Navbar>
+      <Navbar bg="dark" variant="dark" fixed="bottom">
+        <Container className="flex-row justify-content-center">
+          <h5 className='text-success text-center'>footer</h5>
+        </Container>
+      </Navbar>
     </div>
   );
 }
