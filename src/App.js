@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import{Navbar,Nav,Container,NavDropdown} from 'react-bootstrap';
-import Instructions from './components/Instructions/Instructions';
+import Contact from './pages/Contact';
 function App() {
   return (
     <div className="App">
@@ -36,7 +36,7 @@ function App() {
       </Navbar>
       
 
-      <Instructions className="mx-3" />
+      <Contact className="mx-3 py-3" />
 
 
       <Navbar bg="dark" variant="dark" fixed="bottom">
