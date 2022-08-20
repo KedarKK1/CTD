@@ -1,0 +1,8 @@
+.myInline{
+    display: inline-block;
+    justify-content: space-between;
+}
+
+.giveMinHeight{
+    min-height: 30vh;
+}
