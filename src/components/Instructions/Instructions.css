@@ -1,0 +1,270 @@
+
+body:not(.myLI .myUL .titleDescription){
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to top right, #152238 0%, #152238 100%);
+    --color: rgba(30, 30, 30);
+    --bgColor: rgba(245, 245, 245);
+}
+
+.myButton3{
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5vh;
+    margin-bottom: 5%;
+    background-color: #348c57;
+    border-color: transparent;
+    width: 10vw;
+    outline: none;
+}
+
+button[disabled=disabled], button:disabled{
+    background-color: #7f7f7f;
+}
+
+.giveMaxHeight{
+    height: 85vh;
+    overflow: hidden;
+}
+
+.qnBorder{
+    max-height: calc(100vh - 120px);
+    overflow-y: scroll !important;
+    color:white;
+    border: 1px solid white;
+    border-radius: 10px;
+    /* padding: 10vh 5vw 10vh 5vw; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.instructions{
+    color:white;
+    /* color:black; */
+    border: 1px solid white;
+    /* border: 1px solid black; */
+    margin: 10vh 5vw 10vh 5vw;
+    overflow: scroll;
+}
+
+.instructionTitle{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 4vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    font-weight:bold;
+}
+
+.instructionContent{
+    font-size: 2.5vh;
+}
+
+.myUL{
+    --col-gap: 2rem;
+    --row-gap: 2rem;
+    --line-w: 0.25rem;
+
+    display: grid;
+    grid-template-columns: var(--line-w) 1fr;
+    grid-auto-columns: max-content;
+    column-gap: var(--col-gap);
+    list-style: none;
+    width: min(60rem, 90%);
+    margin-inline: auto;
+} 
+
+/* line */
+.myUL::before{
+    content: "";
+    grid-column:1;
+    grid-row: 1 / span 20;
+    background: rgb(225, 225, 225);
+    border-radius: calc(var(--line-w) / 2);
+}
+
+/* columns */
+
+/* row gaps */
+.myUL .myLI:not(:last-child)
+{
+    margin-bottom: var(--row-gap);
+}
+
+.myUL .myLI:last-child
+{
+    margin-bottom: 5vh;
+} 
+
+.myUL .myLI{
+    grid-column:2;
+    --inlineP: 1.5rem;
+    margin-inline: var(--inlineP);
+    grid-row: span 2;
+    display: grid;
+    grid-template-rows: min-content min-content min-content;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white; 
+}
+
+.myUL .myLI .liTitle{
+    --liTitleH : 3rem;
+    height: var(--liTitleH);
+    margin-inline: calc(var(--inlineP)*-1); 
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: grid;
+    place-content: center;
+    position: relative;
+    border-radius: calc( var(--liTitleH)/2 0 0 calc(--liTitleH)/2 )
+}
+
+.myUL .myLI .liTitle::before{
+    content: "";
+    width: var(--inlineP);
+    aspect-ratio: 1;
+    background-color: var(--accent-color);
+    background-image: linear-gradient(rgba(0,0,0,0.2) 100%, transparent);
+    position: absolute;
+    top: 100%;
+    clip-path: polygon(0 0, 100% 0, 0 100%); /* for lower triangle */
+    right: 0;
+}
+
+.myUL .myLI .liTitle::after{
+    content: "";
+    position: absolute;
+    width: 2rem;
+    aspect-ratio: 1;
+    background: var(--bgColor);
+    border: 0.3rem solid var(--accent-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    right: calc( 100% + var(--col-gap) + var(--line-w)/2 );
+}
+
+.myUL .myLI .titleDescription{
+    /* background: var(--bgColor); */
+    /* overflow: hidden; */
+    /* background: #5b636f; */
+    position: relative;
+    padding-inline: 1.5rem;
+    padding-block-start: 1.5rem;
+    padding-block-end: 1.5rem;
+    font-weight: 300;
+}
+
+/* shadows */
+.myUL .myLI .titleDescription::before{
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 0.5rem;
+    background: rgba(0,0,0,0.5);
+    left: 50%;
+    border-radius:50%; 
+    /* this blurr effect is for border-bottom wich is visible if card-color is non-dark or white say */
+    filter: blur(4px); 
+    transform:translate(-50%,50%);
+    z-index: -1;
+    bottom: 0.5rem;
+}
+
+.instructionButton{
+    margin-bottom: 4vh;
+}
+
+@media (min-width: 40rem)
+{
+    .myUL{
+        grid-template-columns: 1fr var(--line-w) 1fr;
+    }
+
+    .myUL::before{
+        grid-column: 2;
+    }
+
+    .myUL .myLI:nth-child(odd){
+        grid-column:1;
+    }
+
+    .myUL .myLI:nth-child(even){
+        grid-column:3;
+    }
+
+     /* start second card */
+    .myUL .myLI:nth-child(2){
+        grid-row: 2/4;
+    }
+
+    .myUL .myLI:nth-child(odd) .liTitle::before{
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+        left: 0;
+    }
+
+    .myUL .myLI:nth-child(odd) .liTitle::after{
+        transform: translate(-50%, -50%);
+        left: calc( 100% + var(--col-gap) + var(--line-w)/2 );
+    }
+
+    .myUL .myLI:nth-child(odd) .liTitle{
+        border-radius: 0 calc(var(--liTitleH) / 2) calc(var(--liTitleH) / 2) 0;
+    }
+
+    .myUL .myLI:nth-child(even) .liTitle{
+        border-radius: calc(var(--liTitleH) / 2) 0  0 calc(var(--liTitleH) / 2);
+    }
+    
+}
+
+@media (max-width: 420px)
+{
+    .instructionTitle{
+        font-size: 7vw;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+    .instructions{
+        margin: 10vh 5vw 10vh 5vw;
+    }
+    .qnBorder{
+        padding: 0 0 0 0;
+        overflow: scroll;
+    }
+    .myButton3{
+        width: 35vw;
+    }
+}
+
+@media (max-width: 769px) and (min-width: 420px) {
+    .instructions{
+        margin: 1vh 1vw 1vh 1vw;
+    }
+    .qnBorder{
+        padding: 0 1vw 1vh 0;
+    }
+    .myButton3{
+        width: 22vw;
+    }
+}
+
+
+@media (min-width: 769px){
+    .qnBorder{
+        /* max-height: calc(100vh - 120px);
+        overflow-y: scroll !important;
+        color:white;
+        border: 1px solid white;
+        border-radius: 10px;
+        overflow-y: scroll;
+        overflow-x: hidden; */
+        padding: 10vh 5vw 10vh 5vw;
+    }
+    .myButton3{
+        width: 25vw;
+    }
+}
+

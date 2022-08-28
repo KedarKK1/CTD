@@ -1,0 +1,41 @@
+/* .myInline{
+    display: inline-block;
+    justify-content: space-between;
+} */
+
+/* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.16), 0 6px 20px 0 rgba(0, 0, 0, 0.2); */
+/* background-image: linear-gradient(to top right, #152238 0%, #152238 100%); */
+/* background-image: linear-gradient(to top right, #283b53 0%, #2d4c6e 100%); */
+/* background-color: bisque; */
+/* .giveMinHeight{
+    max-width: 19rem;
+    min-height: 40vh;
+    border-radius: 10px;
+    border: 3px solid black;
+    background-image: linear-gradient(to top right, #222b36 0%, #222b36 100%);
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.16),
+      0 6rgb (80, 94, 110) 0 rgba(0, 0, 0, 0.2);
+}
+
+.giveMinHeight:hover{
+    scale: 1.1;
+    border: 3px solid white;
+}
+
+.myButton2{
+    background-color: #3c526c;
+    margin-top: 3vh;
+    width: 10vw;
+    min-width: 90px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+  } */

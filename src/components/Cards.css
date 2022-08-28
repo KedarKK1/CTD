@@ -1,8 +1,187 @@
-.myInline{
-    display: inline-block;
-    justify-content: space-between;
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  figure {
+    width: 300px;
+    /* background-color: #425d7e; */
+    height: 300px;
+    /* background-color: #F06292; */
+    /* background-color: #3c526c; */
+    background-image: radial-gradient(#3c526c 0%, #394d65 15%, #485b72 40%);
+    border-radius: 10px;
+    color: #fff;
+    display: inline-flex;
+    padding: 5%;
+    word-wrap: break-word;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 30px 8px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19); */
 }
+  figure h2 {
+    transition: 0.2s;
+    transform: translateY(20px);
+  }
+  figure p {
+    transition: 0.2s;
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+  }
+  figure:before {
+    content: '';
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    transition: 0.2s;
+    box-shadow: rgba(255, 255, 255, 0.086) 0px 5px 15px 8px;
+    transform: scaleX(0);
+  }
+  
+  figcaption > hr{
+    margin-top: 20px;
+  }
 
-.giveMinHeight{
-    min-height: 30vh;
-}
+  figure:after {
+    content: '';
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    border-left: solid 2px;
+    border-right: solid 2px;
+    transition: 0.25s;
+    box-shadow: rgba(255, 255, 255, 0.086) 0px 5px 15px 8px;
+    transform: scaleY(0);
+  }
+  
+  figure:hover:before, 
+  figure:hover:after{
+    transform: scale(1);
+  }
+  
+  /* figure:hover p  */
+  figure:hover h2
+  {
+    /* transform: translateY(0); */
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .qnHubTitle{
+    margin-bottom: 1vh;
+  }
+
+  .myButtonQnHub{
+    background-color: #415d7f;
+    margin-top: 3vh;
+    width: 10vw;
+    min-width: 90px;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    border: 3px inset rgb(57, 54, 54);
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+  }
+
+  .myButtonQnHub:hover{
+    scale: 1.1;
+    background-color: #5a789d;
+    box-shadow: 0 0px 15px 5px rgba(241, 236, 236, 0.1);
+  }
+
+  .myProgressBar{
+    height: 4vh;
+    border-radius: 25px;
+    background: crimson;
+  }
+
+  progress[value] {
+    /* width: 100%; */
+    color: lightblue;
+    border-radius: 5px;
+  }
+  
+  progress[value]::-moz-progress-bar {
+      background: lightcolor;
+      /* background-color: #eee; */
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+      
+  }
+
+  progress[value]::-webkit-progress-value {
+    background-image:
+       -webkit-linear-gradient(-45deg, 
+                               transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                               rgba(0,0, 0, .1) 66%, transparent 66%),
+       -webkit-linear-gradient(top, 
+                               rgba(255, 255, 255, .25), 
+                               rgba(0, 0, 0, .25)),
+       -webkit-linear-gradient(left, rgb(77, 95, 171), rgb(95, 99, 196));
+  
+      border-radius: 2px; 
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      background-size: 35px 20px, 100% 100%, 100% 100%;
+      -webkit-animation: animate-stripes 5s linear infinite;
+      animation: animate-stripes 5s linear infinite;
+
+  }
+  
+  @-webkit-keyframes animate-stripes {
+    100% { background-position: -100px 0px; }
+ }
+ 
+ @keyframes animate-stripes {
+    100% { background-position: -100px 0px; }
+ }
+ 
+  
+  progress::-webkit-progress-value {
+    background: rgb(86, 193, 111);
+  }
+  
+  progress::-webkit-progress-bar {
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+  }
+  progress::-webkit-progress-bar-value {
+    -webkit-appearance: none;
+    background: orangered;
+  }
+  
+
+  .questionHubCircle{
+    width: 10vw;
+    height: 10vw;
+    min-width: 80px;
+    min-height: 80px;
+    max-height: 100px;
+    max-width: 100px;
+  }
+
+  /* ProgressBar */
+
+  @media screen and (min-width:769px) and (max-width:992px) {
+    .myProgressBar{
+      width:10vw;
+    }
+  }
+  

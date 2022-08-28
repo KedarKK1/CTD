@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gantari:wght@500&family=Rubik+Maze&display=swap');
+
 .App {
   text-align: center;
   /* background-color: #282c34; */
@@ -11,6 +13,21 @@
   color: white; */
   background-image: linear-gradient(to top right, #152238  0%, #152238 100%);
   overflow-x: scroll;
+  font-family: 'Gantari', sans-serif;
+
+}
+
+.myButtonNavBar{
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #ad3838 ;
+  border-color: transparent;
+  width: 10vw;
+  outline: none;
+}
+
+.navbarFont{
+  font-weight: 550 !important;
 }
 
 .tableCss{
@@ -57,5 +74,19 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .pisbLogo{
+    height: 5vh;
+    width:20vw;
+  }
+  .navTimer{
+    height: 5vh;
+    width:35vw;
+  }
+  .myButtonNavBar{
+    /* margin: 5vh 5vw 5vh 5vw; */
   }
 }

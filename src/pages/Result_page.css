@@ -1,3 +1,14 @@
 .heightManage{
     min-height: 80vh;
 }
+
+
+.myResultCard{
+    background-color: #2b3d61;
+    width: 18rem;
+    min-height: 60vh;
+}
+
+.myResultImage{
+        /* pointer-events: none;     */
+}

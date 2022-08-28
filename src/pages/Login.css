@@ -1,7 +1,155 @@
-.myCardHeight{
+/* .myCardHeight{
     min-height: 80vh;
+} */
+
+/* #loginbg {
+    height: 80vh;
+  } */
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Maze&display=swap');
+
+
+
+.myLoginCard{
+    /* min-height: 50vh; */
+    margin: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* -ms-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
+    width: 28vw;
+    background-image: linear-gradient(to top right, #222b36 0%, #222b36 100%);
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.16),
+      0 6rgb (80, 94, 110) 0 rgba(0, 0, 0, 0.2);
 }
 
-.myInput{
-    
-}
+.RCTEXT {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    color: #ffffff;
+    /* font-size: 5.5vh; */
+    font-size: 8vh;
+    font-family: 'Rubik Maze', cursive;
+  }
+
+  .logintitle{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    color: #ffffff;
+    font-size: 5.5vh;
+    font-weight: bold;
+  }
+
+/* .myLoginColumn{
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+} */
+
+  .myInput{
+    width: 80%;
+    /* background-color: #282c34; */
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+
+  input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-color: #4d516c;
+    background-color: #222b36;
+    outline: none;
+    color: #ffffff;
+  }
+  input:focus {
+    outline: none;
+    border-bottom-color: #ffffff;
+    transition: 1s;
+  }
+
+  .myButton{
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5vh;
+    margin-bottom: 5%;
+    background-color: #374a71;
+    border-color: transparent;
+    width: 10vw;
+    outline: none;
+  }
+
+  .myButton:active {
+    border: 3px solid #4d516c;
+    color: #fff;
+    transform: scale(0.9);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24)!important;
+    -webkit-box-shadow: none!important;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .myLoginCard {
+      width: 80vw;
+      margin-bottom: 15vh;;
+    }
+    .myButton {
+      width: 40vw;
+    }
+    .formip {
+      width: 50vw;
+    }
+    .logintitle {
+      font-size: 4vh;
+    }
+    body{
+      overflow: scroll;
+    }
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 769px) {
+    .myLoginCard {
+      width: 70vw;
+    }
+    .myButton {
+      width: 40vw;
+    }
+    .formip {
+      width: 50vw;
+    }
+    .logintitle {
+      font-size: 4vh;
+    }
+
+  }
+
+  @media only screen and (min-width: 769px) {
+    .logintitle {
+      font-size: 3.8vh;
+    }
+    body{
+      overflow-y: hidden;
+    }
+    .myLoginColumn{
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+  @media only screen and (min-width: 1900px) {
+    .logintitle {
+      font-size: 3.8vh;
+    }
+    body{
+      overflow-y: hidden;
+    }
+  }
+  
