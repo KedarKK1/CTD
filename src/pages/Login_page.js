@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
+import { useCookies } from "react-cookie";
 
 const Login_page = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [cookies, setCookie] = useCookies(["token"]);
 
     const [alertMessage, setAlertMessage] = React.useState({
         message: "",
@@ -46,9 +48,55 @@ const Login_page = () => {
                 wholeAlert: "alert d-block alert-danger"
             })
         } else {
-            navigate("/instruction")
-        }
+            // navigate("/instruction")
+            // var raw = JSON.stringify({
+            //     "username": "admins",
+            //     "password": "admins"
+            //   });
+
+            var raw = JSON.stringify(formValue);
+              
+            var requestOptions = {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: raw,
+            redirect: 'follow'
+            };
+              
+            fetch("http://localhost:8000/auth/token/login", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var tokenObject = JSON.parse(result);
+                var token = tokenObject.auth_token;
+                if(token){
+                    setCookie("token", token, { path: "/", maxAge: 4320 }); // 3 days
+                    navigate("/instruction")
+                }else{
+                    setAlertMessage({
+                        ...alertMessage,
+                        message: "Incorrect Username or Password!",
+                        icon: "fa fa-exclamation-triangle",
+                        wholeAlert: "alert d-block alert-danger"
+                    })
+                }
+
+            })
+            .catch(error => {
+                setAlertMessage({
+                    ...alertMessage,
+                    message: "Incorrect Username or Password!",
+                    icon: "fa fa-exclamation-triangle",
+                    wholeAlert: "alert d-block alert-danger"
+                })
+                console.log('error', error)
+            });}
         setLoading(false);
+    }
+
+    const handleEnter = (e) => {
+        if (e.keyCode === 13 || e.key === 'Enter') {
+            validate();
+          }
     }
 
     if (loading) {
@@ -83,41 +131,43 @@ const Login_page = () => {
                                 </div>
                                 <Card.Text>
                                     <div className="logintitle text-white">LOGIN</div>
-                                    {/* <InputGroup className="mb-3"> */}
-                                    {/* <InputGroup.Text id="inputGroup-sizing-default">
-                                                Username
-                                            </InputGroup.Text> */}
-                                    {/* <Form.Control
-                                                className="myInput"
-                                                aria-label="Default"
-                                                placeholder="Username"
-                                                aria-describedby="inputGroup-sizing-default"
-                                            />
-                                        </InputGroup> */}
-                                    {/* <div className="formInput"> */}
-                                    {/* </div> */}
-                                    <span><label className="form-check-label text-white pe-2" htmlFor="username">
-                                        <i className="fa fa-user" aria-hidden="true" />
-                                    </label></span>
-                                    <input name="username" value={formValue.username} type="text" className="myInput" placeholder="Username" id="username" onChange={onChange1} />
+                                    {/* <form> */}
+                                        {/* <InputGroup className="mb-3"> */}
+                                        {/* <InputGroup.Text id="inputGroup-sizing-default">
+                                                    Username
+                                                </InputGroup.Text> */}
+                                        {/* <Form.Control
+                                                    className="myInput"
+                                                    aria-label="Default"
+                                                    placeholder="Username"
+                                                    aria-describedby="inputGroup-sizing-default"
+                                                />
+                                            </InputGroup> */}
+                                        {/* <div className="formInput"> */}
+                                        {/* </div> */}
+                                        <span><label className="form-check-label text-white pe-2" htmlFor="username">
+                                            <i className="fa fa-user" aria-hidden="true" />
+                                        </label></span>
+                                        <input name="username" value={formValue.username} type="text" className="myInput" placeholder="Username" id="username" onChange={onChange1} />
 
-                                    {/* <InputGroup className="mt-3"> */}
-                                    {/* <InputGroup.Text id="inputGroup-sizing-default">
-                                                Password
-                                            </InputGroup.Text> */}
-                                    {/* <Form.Control
-                                                className="myInput"
-                                                aria-label="Default"
-                                                placeholder="Password"
-                                                aria-describedby="inputGroup-sizing-default"
-                                            />
-                                        </InputGroup> */}
-                                    <br />
-                                    <label className="form-check-label text-white pe-2" htmlFor="password">
-                                        <i className="fa-solid fa-key" />
-                                    </label>
-                                    <span><input name="password" value={formValue.password} type="password" id="password" className="myInput" placeholder="Password" onChange={onChange1} /></span>
-                                    <button onClick={validate} className="myButton text-white">Login</button>
+                                        {/* <InputGroup className="mt-3"> */}
+                                        {/* <InputGroup.Text id="inputGroup-sizing-default">
+                                                    Password
+                                                </InputGroup.Text> */}
+                                        {/* <Form.Control
+                                                    className="myInput"
+                                                    aria-label="Default"
+                                                    placeholder="Password"
+                                                    aria-describedby="inputGroup-sizing-default"
+                                                />
+                                            </InputGroup> */}
+                                        <br />
+                                        <label className="form-check-label text-white pe-2" htmlFor="password">
+                                            <i className="fa-solid fa-key" />
+                                        </label>
+                                        <span><input name="password" value={formValue.password} type="password" id="password" className="myInput" placeholder="Password" onChange={onChange1} /></span>
+                                        <button onClick={validate} onKeyDown={handleEnter} className="myButton text-white">Login</button>
+                                    {/* </form> */}
                                 </Card.Text>
                             </Card.Body>
                         </Card>

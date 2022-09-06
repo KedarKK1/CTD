@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gantari:wght@500&family=Rubik+Maze&display=swap');
-
+/* --font-family : Open Sans, Helvetica Neue, Segoe UI, Ubuntu, sans-serif; */
+/* --color-text: #53a1b3; */
 .App {
   text-align: center;
   /* background-color: #282c34; */
@@ -12,6 +13,7 @@
   font-size: calc(10px + 2vmin);
   color: white; */
   background-image: linear-gradient(to top right, #152238  0%, #152238 100%);
+  /* background-image: #141e24; */
   overflow-x: scroll;
   font-family: 'Gantari', sans-serif;
 

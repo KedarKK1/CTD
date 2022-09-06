@@ -4,6 +4,7 @@ import Cards from '../components/Cards'
 import './QustionHub_page.css';
 
 const QuestionHub_page = () => {
+
     const questions = [
         {name: "Katya's Maze", Progress: 78, Attempts: 2},
         {name: "Chef's Palindrome", Progress: 25, Attempts: 1},
@@ -12,6 +13,19 @@ const QuestionHub_page = () => {
         {name: "Barinsormer", Progress: 67, Attempts: 5},
         {name: "Natash's Shortest Path", Progress: 45, Attempts: 2},
     ] 
+
+    const questions2 = async () => {
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        await fetch("http://localhost:8000/NCC/question", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+        console.log('myQuestions',questions2)
+    }
+    questions2();
     return (
         <Container className="questionHubContainer d-flex justify-content-center align-items-center px-2 py-2">
             

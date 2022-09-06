@@ -14,9 +14,24 @@ import Instructions from './components/Instructions/Instructions';
 import Submissions from './components/Submissions/Submissions';
 import pisbLogo from './images/pisblogo.png';
 import rclogo from './images/rclogo.png';
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom"
 import './App.css';
+import RequireAuth from './components/RequireAuth';
 
 function App() {
+  const [cookies, setCookie] = useCookies();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    fetch("/result")
+      .then(() => {
+        setCookie("token", "", { path: "/" });
+      }).then(()=>{
+        navigate("./result")
+      }).catch(error => console.log('error', error));
+  }
+
   return (
     <div className="App">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ maxHeight: '60px' }}>
@@ -41,7 +56,7 @@ function App() {
               <Nav.Link className="d-flex align-items-center navbarFont" eventKey={1} href="./question_hub"><span><i className="fa fa-list-alt px-1" aria-hidden="true" /></span>QUESTION HUB</Nav.Link>
               <Nav.Link className="d-flex align-items-center navbarFont" eventKey={2} href="./submission"><i className="fa fa-file-code px-1" aria-hidden="true" />SUBMISSIONS</Nav.Link>
               <Nav.Link className="d-flex align-items-center navbarFont" eventKey={3} href="./leaderboard"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />LEADERBOARD</Nav.Link>
-              <Nav.Link className="d-flex align-items-center navbarFont" eventKey={4} href="./"><button className="myButtonNavBar"><i className="fa fa-sign-out" aria-hidden="true"></i> LOG OUT</button></Nav.Link>
+              <Nav.Link className="d-flex align-items-center navbarFont" eventKey={4} href="./"><button className="myButtonNavBar" onClick={handleLogOut}><i className="fa fa-sign-out" aria-hidden="true"></i> LOG OUT</button></Nav.Link>
               <Nav.Link><Image src={rclogo} alt="RC_LOGO" style={{ maxHeight: '50px' }} /></Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -60,19 +75,20 @@ function App() {
       {/* <Login_page /> */}
       {/* </div> */}
       <div className="container-fluid">
-
         <Routes>
           <Route path="/" element={<Loginpage />} />
-          <Route path="/instruction" element={<Instructions className="mx-3" />} />
-          <Route path="/question_hub" element={<QuestionHub_page />} >
+          <Route path="/result" element={<Result_page />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/instruction" element={<Instructions className="mx-3" />} />
+            <Route path="/question_hub" element={<QuestionHub_page />} >
+            </Route>
+            <Route path="/question_hub/:id" element={<Coding />} >
+            </Route>
+            {/* <Route path="/submission" element={<Submission_page />} /> */}
+            <Route path="/submission" element={<Submissions />} />
+            {/* <Route path="/leaderboard" element={<LeaderBoard_page />} /> */}
+            <Route path="/leaderboard" element={<Leaderboard />} />
           </Route>
-            <Route path="/question_hub/:id" element={<Coding /> } >
-          </Route>
-          {/* <Route path="/submission" element={<Submission_page />} /> */}
-          <Route path="/submission" element={<Submissions />} />
-          <Route path="/result" element={Result_page} />
-          {/* <Route path="/leaderboard" element={<LeaderBoard_page />} /> */}
-          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </div>
 
