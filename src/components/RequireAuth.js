@@ -3,7 +3,8 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useCookies } from "react-cookie";
 
 const RequireAuth = () => {
-    const [cookies, setCookie] = useCookies();
+    // const [cookies, setCookie] = useCookies();
+    const [cookies] = useCookies();
     // console.log('cookies usertype',cookies.usertype);
     const location = useLocation();
     return (

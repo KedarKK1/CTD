@@ -1,11 +1,11 @@
 import React from 'react'
 import { Card, Col, Container, Image, Row } from 'react-bootstrap';
-import "./Result_page.css"
+import "./ResultPage.css"
 const gold = require("../images/gold 3.png")
 const silver = require("../images/silver 3.png")
 const bronze = require("../images/bronze 3.png")
 
-const Result_page = () => {
+const ResultPage = () => {
     return (
         <Container>
             <Row className="heightManage d-flex justify-content-center align-content-center text-white">
@@ -90,4 +90,4 @@ const Result_page = () => {
     )
 }
 
-export default Result_page
+export default ResultPage

@@ -28,6 +28,15 @@
   outline: none;
 }
 
+.myLoginButtonNavBar{
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #303f84 ;
+  border-color: transparent;
+  width: 10vw;
+  outline: none;
+}
+
 .navbarFont{
   font-weight: 550 !important;
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import Cards from '../components/Cards'
-import './QustionHub_page.css';
+import './QuestionHubPage.css';
 
-const QuestionHub_page = () => {
+const QuestionHubPage = () => {
 
     const questions = [
         {name: "Katya's Maze", Progress: 78, Attempts: 2},
@@ -17,6 +17,7 @@ const QuestionHub_page = () => {
     const questions2 = async () => {
         var requestOptions = {
             method: 'GET',
+            headers: {},
             redirect: 'follow'
         };
         await fetch("http://localhost:8000/NCC/question", requestOptions)
@@ -56,4 +57,4 @@ const QuestionHub_page = () => {
     )
 }
 
-export default QuestionHub_page
+export default QuestionHubPage

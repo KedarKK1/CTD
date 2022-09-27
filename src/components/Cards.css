@@ -12,7 +12,8 @@
     height: 300px;
     /* background-color: #F06292; */
     /* background-color: #3c526c; */
-    background-image: radial-gradient(#3c526c 0%, #394d65 15%, #485b72 40%);
+    background-image: radial-gradient(#3c526c 0%, #394d65 5%, #485b72 20%);
+    /* background-image: radial-gradient(#3c526c 0%, #394d65 15%, #485b72 40%); */
     border-radius: 10px;
     color: #fff;
     display: inline-flex;
