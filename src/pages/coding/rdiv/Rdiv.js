@@ -34,7 +34,7 @@ function Rdiv() {
   }
   function themec(e) {
     utheme(e.target.value);
-    if(e.target.value=="monokai" || e.target.value=="twilight"){
+    if(e.target.value==="monokai" || e.target.value==="twilight"){
         ucdc("black");}
     else{
         ucdc("");

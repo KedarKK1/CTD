@@ -10,7 +10,7 @@ const Cards = (props) => {
             <div className="container text-white px-3 d-flex flex-wrap justify-content-center align-items-center">
                 <figure>
                     <figcaption>
-                        <h2>{props.index}. {props.questions.name}</h2>
+                        <h2>{props.index}. {props.questions.title}</h2>
                         <hr />
                         <Row className="mb-2">
                             <Col lg={3} md={3} xl={3} sm={12} sx={12} className="d-flex flex-wrap flex-row align-items-center px-3">
@@ -28,11 +28,11 @@ const Cards = (props) => {
                                         <span className="sr-only">70% Complete</span>
                                     </div>
                                 </div> */}
-                                <span><progress id="file" value={props.questions.Progress} max="100" className="myProgressBar"> {props.questions.Progress} </progress></span>
+                                <span><progress id="file" value={props.questions.accuracy} max="100" className="myProgressBar"> {props.questions.accuracy} </progress></span>
                             </Col>
                         </Row>
                         <Row className="mb-2">
-                            <h6 className="d-inline pe-2 mb-0">Attempts : <b>6</b></h6>
+                            <h6 className="d-inline pe-2 mb-0">Attempts : <b>{props.questions.total_submissions}</b></h6>
                         </Row>
                         <button className="myButtonQnHub"><a href={`question_hub/${props.index}`} >Attempt</a></button>
                     </figcaption>

@@ -21,17 +21,23 @@ import RequireAuth from './components/RequireAuth';
 import { useEffect } from 'react';
 
 function App() {
-  const [setCookie] = useCookies();
   // const [cookies, setCookie] = useCookies();
   const navigate = useNavigate();
+  const [cookies, setCookies, removeCookies] = useCookies(["token"]);
 
   const handleLogOut = () => {
-    fetch("/result")
-      .then(() => {
-        setCookie("token", "", { path: "/" });
-      }).then(()=>{
-        navigate("./result")
-      }).catch(error => console.log('error', error));
+    // setCookie("token", "null", { path: "/" });
+    // setCookie("token", "", { path: "/", maxAge: 4320 });
+    if(cookies){
+      console.log(" ")
+    } 
+    setCookies("token", "", { path: "/" }).then(()=>{
+      fetch("./result")
+        .then(() => {
+          navigate("./result")  
+          removeCookies("token", "", { path: "/" });
+        }).catch(error => console.log('error', error));
+    });
   }
   
     const location = useLocation()

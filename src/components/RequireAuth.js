@@ -8,7 +8,9 @@ const RequireAuth = () => {
     // console.log('cookies usertype',cookies.usertype);
     const location = useLocation();
     return (
-        cookies.token
+        cookies.token ===""
+        ? <Navigate to="./result" state={{ from: location }} replace />
+        : cookies.token && cookies.token !==""
         ? <Outlet />
         : <Navigate to="./" state={{ from: location }} replace />
     );

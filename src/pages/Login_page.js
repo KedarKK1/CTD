@@ -8,6 +8,7 @@ const Login_page = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [cookies, setCookie] = useCookies(["token"]);
+    // const [cookies, setCookie] = useCookies(["token"]);
 
     const [alertMessage, setAlertMessage] = React.useState({
         message: "",
@@ -55,7 +56,6 @@ const Login_page = () => {
             //   });
 
             var raw = JSON.stringify(formValue);
-              
             var requestOptions = {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -70,6 +70,9 @@ const Login_page = () => {
                 var token = tokenObject.auth_token;
                 if(token){
                     setCookie("token", token, { path: "/", maxAge: 4320 }); // 3 days
+                    if(cookies){
+                        console.log(" ")
+                    }
                     navigate("/instruction")
                 }else{
                     setAlertMessage({
@@ -79,9 +82,11 @@ const Login_page = () => {
                         wholeAlert: "alert d-block alert-danger"
                     })
                 }
+                // console.log('formValue',formValue)
 
             })
             .catch(error => {
+                // console.log('formValue',formValue)
                 setAlertMessage({
                     ...alertMessage,
                     message: "Incorrect Username or Password!",
