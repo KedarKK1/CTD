@@ -153,7 +153,7 @@ const Login_page = () => {
                                         <span><label className="form-check-label text-white pe-2" htmlFor="username">
                                             <i className="fa fa-user" aria-hidden="true" />
                                         </label></span>
-                                        <input name="username" value={formValue.username} type="text" className="myInput" placeholder="Username" id="username" onChange={onChange1} />
+                                        <input name="username" onKeyPress={handleEnter} tabIndex="1" value={formValue.username} type="text" className="myInput" placeholder="Username" id="username" onChange={onChange1} />
 
                                         {/* <InputGroup className="mt-3"> */}
                                         {/* <InputGroup.Text id="inputGroup-sizing-default">
@@ -170,8 +170,8 @@ const Login_page = () => {
                                         <label className="form-check-label text-white pe-2" htmlFor="password">
                                             <i className="fa-solid fa-key" />
                                         </label>
-                                        <span><input name="password" value={formValue.password} type="password" id="password" className="myInput" placeholder="Password" onChange={onChange1} /></span>
-                                        <button onClick={validate} onKeyDown={handleEnter} className="myButton text-white">Login</button>
+                                        <span><input name="password" onKeyPress={handleEnter} tabIndex="2" value={formValue.password} type="password" id="password" className="myInput" placeholder="Password" onChange={onChange1} /></span>
+                                        <button onClick={validate} onKeyDown={handleEnter} tabIndex="3" className="myButton text-white">Login</button>
                                     {/* </form> */}
                                 </Card.Text>
                             </Card.Body>

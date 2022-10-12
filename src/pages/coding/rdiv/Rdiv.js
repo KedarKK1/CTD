@@ -1,5 +1,6 @@
 // import { Button } from 'bootstrap';
-import { useState, FileReader, React } from "react";
+import { useCookies } from "react-cookie";
+import { useState, FileReader, React, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import "./rdiv.css";
 // import Code_Editor from '../code_editor/Code_Editor';
@@ -13,11 +14,20 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
+import { useNavigate } from "react-router-dom";
+var axios = require('axios');
+
 function Rdiv() {
   let [lang, updatelang] = useState("c_cpp");
   let [theme, utheme] = useState("monokai");
   let cscore = 100;
-  let [cdc,ucdc]=useState("black");
+  let [cdc, ucdc] = useState("black");
+  const [loading, setLoading] = useState(false);
+  const [question, setQuestion] = useState([]);
+  const [cookies, setCookies] = useCookies(["token"]);
+  const [userInpText, setUserInpText] = useState("");
+  const navigate = useNavigate();
+
   const fileu = async (e) => {
     e.preventDefault();
     const reader = new FileReader();
@@ -34,14 +44,92 @@ function Rdiv() {
   }
   function themec(e) {
     utheme(e.target.value);
-    if(e.target.value==="monokai" || e.target.value==="twilight"){
-        ucdc("black");}
-    else{
-        ucdc("");
+    if (e.target.value === "monokai" || e.target.value === "twilight") {
+      ucdc("black");
+    }
+    else {
+      ucdc("");
     }
     console.log(e.target.value);
     // console.log(theme);
   }
+  const submitInput = () =>{
+    try {
+      setLoading(true);
+
+      // console.log("cookies", cookies.token)
+    
+
+      var formdata = new FormData();
+      if(lang === "c"){
+        formdata.append("language", "c");
+
+      }else if(lang === "Java"){
+        formdata.append("language", "java");
+
+      }else if(lang === "python"){
+        formdata.append("language", "python");
+
+      }else if(lang === "c_cpp"){
+        formdata.append("language", "cpp");
+
+      }else{
+        console.log("Please enter correct language")
+      }
+      formdata.append("code", `${userInpText}`)
+
+      var config = {
+        method: 'POST',
+        url: `http://localhost:8000/RC/submit/${question.id}`,
+        headers: { 
+          'Authorization': `Token ${cookies.token}`
+        },
+        body: formdata,
+      };
+      console.log('question.id - ',question.id)
+      fetch(`http://localhost:8000/RC/submit/${question.id}`, config)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+      setLoading(false);
+      //! look at below navigation if ./sub or /sub or sub only
+      navigate('/submission')
+    } catch (err) {
+      console.log('err',err);
+    }
+  }
+
+  useEffect(() => {
+    const loadData = async () => {
+        setLoading(true);
+        console.log("cookies", cookies.token)
+        var config = {
+            method: 'get',
+            url: `http://localhost:8000/RC/user`,
+            headers: {
+                'Authorization': `Token ${cookies.token}`
+            }
+        };
+
+        const questionsList = await axios(config)
+        //   .catch(function (error) {
+        //       console.log(error);
+        //     });
+        console.log('questionsList', questionsList.data)
+        //   .then(function (response) {
+        //     console.log(JSON.stringify(response.data));
+        //   })
+        setQuestion(questionsList.data);
+        setLoading(false);
+    }
+    loadData();
+}, [])
+
+if (loading) {
+    return (
+        <>Loadingg....</>
+    )
+}
 
   return (
     <Card className="rdiv">
@@ -49,14 +137,15 @@ function Rdiv() {
       <Card className="rtopnav bg-t c-w">
         <div className="rtn rtn1">
           <select name="lang" id="lang" onChange={langc} className="bg-t c-w br-2 b-1">
-            <option value="c_cpp" className="bg-bl c-w">C</option>
+            <option value="c" className="bg-bl c-w">C</option>
             <option value="c_cpp" className="bg-bl c-w">C++</option>
             <option value="java" className="bg-bl c-w">Java</option>
             <option value="python" className="bg-bl c-w">Python</option>
           </select>
         </div>
         <div className="rtn rtn2">
-          <h5>Your Score :{cscore}</h5>
+          {/* <h5>Your Score :{cscore}</h5> */}
+          <h5>Your Score :{question.total_score}</h5>
         </div>
         <div className="rtn rtn3">
           <select name="theme" id="theme" onChange={themec} className="bg-t c-w br-2 b-1">
@@ -70,9 +159,11 @@ function Rdiv() {
       <Card className="ediv">
         <AceEditor
           mode={lang}
+          value={ userInpText }
+          onChange={ (e)=>{setUserInpText(e)} }
           theme={theme}
           name="UNIQUE_ID_OF_DIV"
-          style={{ height: "100%", width: "100%", backgroundColor:cdc }}
+          style={{ height: "100%", width: "100%", backgroundColor: cdc }}
           resize="True"
           editorProps={{ $blockScrolling: true }}
           setOptions={{
@@ -90,19 +181,20 @@ function Rdiv() {
       </Card>
       <Card className="rtopnav rbottomnav bg-t">
         <div >
-          <button className="rbn rbn1 bg-t  b-1 c-w br-2 pd-lr-15">||Run</button>
+          <button className="rbn rbn1 bg-t  b-1 c-w br-2 pd-lr-15"><span><i class="fa-solid fa-play"></i> </span>Run</button>
         </div>
         <div >
           <button className="rbn rbn2 bg-t  b-1 c-w br-2 pd-lr-15">Load Buffer</button>
         </div>
         <div >
           <label htmlFor="inpfff" className="rbn rbn3 bg-t  b-1 c-w br-2 pd-lr-15">
-            Choose File
-          </label>
+            {/* Choose File */}
+            <span><i class="fa-solid fa-file-arrow-up"></i> </span> Choose File
+          </label>  
           <input type="file" name="inpf" id="inpfff" onChange={fileu} />
         </div>
-        <div >
-          <input type="submit" value="Submit" className="rbn rbn4 b-b pd-lr-15 bg-t  b-1 c-w br-2" />
+         <div >
+          <input onClick={submitInput} type="submit" value="Submit" className="rbn rbn4 b-b pd-lr-15 bg-t  b-1 c-w br-2" />
         </div>
       </Card>
     </Card>

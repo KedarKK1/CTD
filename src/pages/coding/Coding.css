@@ -7,3 +7,17 @@
     flex-direction: row;
 }
 
+.ldivs{
+    width: 100%;
+}
+
+.rdivs{
+    width: 100%;
+}
+
+/* @media screen(max-width: 768px) {
+    .ldivs, .rdivs{
+        width: 100%;
+    }
+} */
+
