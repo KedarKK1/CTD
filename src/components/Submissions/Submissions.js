@@ -1,6 +1,6 @@
 import { ProgressBar} from "react-bootstrap";
-// import { useState } from 'react';
-// import { Table } from "react-bootstrap";
+import { useState } from 'react';
+import { Table } from "react-bootstrap";
 import React from 'react';
 import "./Submissions.css";
 import QueCard from "./QueCard";
@@ -8,13 +8,13 @@ import SubCard from "./SubCard";
 // import ReactPaginate from 'react-paginate';
 
 const Submissions = () => {
-    // const [queno, setQueno] = useState(1);
+    const [queno, setQueno] = useState(1);
 
-    // const [qdetails, setQdetails] = useState([
-    //     {id:1, time:'00:00', progress:10 },
-    //     {id:2, time:'00:00', progress:70 },]);
+    const [qdetails, setQdetails] = useState([
+        {id:1, time:'00:00', progress:10 },
+        {id:2, time:'00:00', progress:70 },]);
 
-   const queno = 1, qdetails=[{id:1, time:'00:00', progress:10 }, {id:2, time:'00:00', progress:70 }];
+   
 
   
 
@@ -29,8 +29,8 @@ const Submissions = () => {
     onPageChange={console.log("click")}
     containerClassName={"pagination"}
     subContainerClassName={"pages pagination"}
-    activeClassName={"active"} /> */}
-         
+    activeClassName={"active"} />
+          */}
           <div className="ques">
                 <QueCard qno={queno} />
                 {qdetails.map((que) => (

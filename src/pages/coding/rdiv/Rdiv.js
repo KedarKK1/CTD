@@ -41,6 +41,7 @@ function Rdiv() {
     // console.log(lang);/
     updatelang(e.target.value);
     console.log(e.target.value);
+    setUserInpText(localStorage.getItem(`${e.target.value}`));
   }
   function themec(e) {
     utheme(e.target.value);
@@ -63,20 +64,24 @@ function Rdiv() {
       var formdata = new FormData();
       if(lang === "c"){
         formdata.append("language", "c");
+        formdata.append("code", localStorage.getItem("c"))
 
       }else if(lang === "Java"){
         formdata.append("language", "java");
+        formdata.append("code", localStorage.getItem("java"))
 
       }else if(lang === "python"){
         formdata.append("language", "python");
+        formdata.append("code", localStorage.getItem("python"))
 
       }else if(lang === "c_cpp"){
         formdata.append("language", "cpp");
+        formdata.append("code", localStorage.getItem("cpp"))
 
       }else{
         console.log("Please enter correct language")
       }
-      formdata.append("code", `${userInpText}`)
+      // formdata.append("code", `${userInpText}`)
 
       var config = {
         method: 'POST',
@@ -100,6 +105,10 @@ function Rdiv() {
   }
 
   useEffect(() => {
+    localStorage.setItem('c', `// Enter your solution here \n`)
+    localStorage.setItem('c_cpp', `#include <iostream> \n using namespace std; \n int main(){ \n int t; cin>>t;  \n  cout<<"Hello"; \n return 0; \n}`)
+    localStorage.setItem('java', `class solution{ \n  public void ans() { \n // Enter your code here } \n } \n`)
+    localStorage.setItem('python', `# Enter your solution here \n`)
     const loadData = async () => {
         setLoading(true);
         console.log("cookies", cookies.token)
