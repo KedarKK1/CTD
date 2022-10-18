@@ -10,7 +10,10 @@
     margin-right: 15px;
     background-color: transparent;
 }
-.ques{
+
+/* ! Here is the error */
+/* changed name from ques */
+.quesQHub{
     width: 80%;
     margin-left: 10%;
     display: flex;
