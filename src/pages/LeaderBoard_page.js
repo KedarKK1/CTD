@@ -7,7 +7,7 @@ import "./LeaderBoard.css";
 const LeaderBoard_page = () => {
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState();
+  const [questions, setQuestions] = useState([]);
 
   const now = 60;
   const now2 = 10;
@@ -26,7 +26,7 @@ const LeaderBoard_page = () => {
   useEffect(() => {
     const loadData = async () =>{
         setLoading(true);
-        console.log("cookies", cookies.token)
+        // console.log("cookies", cookies.token)
         var config = {
             method: 'get',
             url: 'http://localhost:8000/RC/allranks',
@@ -36,9 +36,9 @@ const LeaderBoard_page = () => {
           };
           
         const questionsList = await axios(config).then(res => {
-          console.log('res',res)
-          setQuestions(res.data);
-          console.log('questionsList',res.data)
+          // console.log('res.data',res.data) 
+          setQuestions([...questions, res.data]);
+          console.log('questions',questions)
 
         }).catch(function (error) {
               console.log(error);
@@ -62,10 +62,10 @@ const LeaderBoard_page = () => {
       <table className="text-white leaderboard table table-bordered">
         <thead>
           <tr>
-            <td rowSpan="1">Rank</td>
-            <td rowSpan="1">Username</td>
-            <th colspan="6">Questions</th>
-            <td rowSpan="1">Total score</td>
+            <th scope="col" rowSpan="1">Rank</th>
+            <th scope="col" rowSpan="1">Username</th>
+            <th scope="col" colSpan="6">Questions</th>
+            <th scope="col" rowSpan="1">Total score</th>
           </tr>
           <tr>
             <td></td>
@@ -81,39 +81,56 @@ const LeaderBoard_page = () => {
         </thead>
         <tbody>
           
-          {/* <tr>
-            <td>1</td>
-            <td>KedarKK1</td>
-            <td>7</td>
-            <td>5</td>
-            <td>4</td>
-            <td>22</td>
-            <td>76</td>
-            <td>53</td>
-            <td> 750 </td>
-          </tr>
+          {/* {questions[0] && Object.entries(questions[0]).length && Object.entries(questions).map((user, idx)=>{
           <tr>
-            <td>2</td>
-            <td>Jitesh</td>
+            <td>{idx}</td>
+            <td>{user[0]}</td>
             <td>7</td>
             <td>5</td>
             <td>4</td>
             <td>22</td>
             <td>76</td>
             <td>53</td>
-            <td> 750 </td>
+            <td>{user[1].total_score}</td>
           </tr>
-          <tr>
-            <td>3</td>
-            <td>Kriplani</td>
-            <td>7</td>
-            <td>5</td>
-            <td>4</td>
-            <td>22</td>
-            <td>76</td>
-            <td>53</td>
-            <td> 750 </td>
-          </tr> */}
+          })} */}
+
+
+          {questions[0] && questions.length > 0 && 
+              (Object.entries(questions[0]).map((user2, idx2)=>{
+                return(
+                  <tr key={idx2+1}>
+                    <td>{idx2+1}</td>
+                    <td>{user2[0] || 'UNKNOWN'}</td>
+                    <td>{user2[1][1] || '0'}</td>
+                    <td>{user2[1][2] || '0'}</td>
+                    <td>{user2[1][3] || '0'}</td>
+                    <td>{user2[1][4] || '0'}</td>
+                    <td>{user2[1][5] || '0'}</td>
+                    <td>{user2[1][6] || '0'}</td>
+                    <td>{user2[1].total_score || '0'}</td>
+                  </tr>
+                  )
+                })
+              )
+          }
+
+          {/* {questions && questions.length > 0 && questions.map((user, idx)=>{
+            return (              
+            <tr>
+              <td>{idx}</td>
+              <td>{user[0]}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            )
+          })} */}
+
         </tbody>
       </table>
       <Pagination className="d-flex justify-content-center">
