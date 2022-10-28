@@ -7,7 +7,6 @@ import "./rdiv.css";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-c_cpp";
-import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-github";
@@ -29,13 +28,22 @@ function Rdiv( props ) {
   const navigate = useNavigate();
 
   const fileu = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    // const reader = new FileReader();
+    // reader.onload = async (e) => {
+    //   const text = e.target.result;
+    //   console.log(text);
+    //   alert(text);
+    // };
+    var file = e;
     const reader = new FileReader();
-    reader.onload = async (e) => {
-      const text = e.target.result;
-      console.log(text);
-      alert(text);
+    reader.onload = function(event) {
+      // The file's text will be printed here
+      console.log(event.target.result)
     };
+  
+    reader.readAsText(file);
+  
   };
   function langc(e) {
     // console.log(lang);/
@@ -68,14 +76,6 @@ function Rdiv( props ) {
           code: localStorage.getItem(`${lang}`)
         };
 
-      }else if(lang === "Java"){
-        // formdata.append("language", "java");
-        // formdata.append("code", localStorage.getItem("java"))
-        formdata = {
-          language: lang,
-          code: localStorage.getItem(`${lang}`)
-        };
-
       }else if(lang === "python"){
         // formdata.append("language", "python");
         // formdata.append("code", localStorage.getItem("python"))
@@ -88,7 +88,7 @@ function Rdiv( props ) {
         // formdata.append("language", "cpp");
         // formdata.append("code", localStorage.getItem("cpp"))
         formdata = {
-          language: lang,
+          language: "cpp",
           code: localStorage.getItem(`${lang}`)
         };
 
@@ -123,7 +123,6 @@ function Rdiv( props ) {
   useEffect(() => {
     localStorage.setItem('c', `// Enter your solution here \n`)
     localStorage.setItem('c_cpp', `#include <iostream> \n using namespace std; \n int main(){ \n int t; cin>>t;  \n  cout<<"Hello"; \n return 0; \n}`)
-    localStorage.setItem('java', `class solution{ \n  public void ans() { \n // Enter your code here } \n } \n`)
     localStorage.setItem('python', `# Enter your solution here \n`)
     const loadData = async () => {
         setLoading(true);
@@ -170,8 +169,7 @@ if (loading) {
           <select name="lang" id="lang" onChange={langc} className="bg-t c-w br-2 b-1">
             <option value="c" className="bg-bl c-w">C</option>
             <option value="c_cpp" className="bg-bl c-w">C++</option>
-            <option value="java" className="bg-bl c-w">Java</option>
-            <option value="python" className="bg-bl c-w">Python</option>
+            <option value="python" className="bg-bl c-w">python</option>
           </select>
         </div>
         <div className="rtn rtn2">
@@ -191,9 +189,8 @@ if (loading) {
         <AceEditor
           mode={lang}
           value={ userInpText }
-          // onChange={ (e)=>{setUserInpText(e)} }
           onChange={onChange}
-
+          // onLoad={this.onLoad}
           theme={theme}
           name="UNIQUE_ID_OF_DIV"
           style={{ height: "100%", width: "100%", backgroundColor: cdc }}
@@ -224,7 +221,7 @@ if (loading) {
             {/* Choose File */}
             <span><i class="fa-solid fa-file-arrow-up"></i> </span> Choose File
           </label>  
-          <input type="file" name="inpf" id="inpfff" onChange={fileu} />
+          <input type="file" accept=".txt,.cpp,.c,.py" name="inpf" id="inpfff" onChange={(e)=> {fileu(e.target.files[0])}} />
         </div>
          <div >
           <input onClick={submitInput} type="submit" value="Submit" className="rbn rbn4 b-b pd-lr-15 bg-t  b-1 c-w br-2" />

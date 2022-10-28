@@ -64,9 +64,9 @@ function Ldiv( props ) {
         </Card> */}
             <div className="row mb-3">
                 <Col className="mt-1 h-100">
-                    <Pagination>
+                    <Pagination >
                         {[...Array(6).keys()].map((x) => (
-                            <Pagination.Item key={x + 1} active={props.qnIdParam == x+1} onClick={() => { navigate(`/question_hub/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
+                            <Pagination.Item  key={x + 1} active={props.qnIdParam == x+1} onClick={() => { navigate(`/question_hub/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
                         ))}
                     </Pagination>
                 </Col>
