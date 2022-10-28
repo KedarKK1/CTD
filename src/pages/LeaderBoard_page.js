@@ -1,8 +1,14 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Table, Button, ProgressBar, Pagination } from 'react-bootstrap';
+import { useCookies } from 'react-cookie';
 import "./LeaderBoard.css";
 
 const LeaderBoard_page = () => {
+  const [cookies] = useCookies(["token"]);
+  const [loading, setLoading] = useState(false);
+  const [questions, setQuestions] = useState();
+
   const now = 60;
   const now2 = 10;
   const now3 = 90;
@@ -17,8 +23,42 @@ const LeaderBoard_page = () => {
     );
   }
 
+  useEffect(() => {
+    const loadData = async () =>{
+        setLoading(true);
+        console.log("cookies", cookies.token)
+        var config = {
+            method: 'get',
+            url: 'http://localhost:8000/RC/allranks',
+            headers: { 
+              'Authorization': `Token ${cookies.token}`
+            }
+          };
+          
+        const questionsList = await axios(config).then(res => {
+          console.log('res',res)
+          setQuestions(res.data);
+          console.log('questionsList',res.data)
+
+        }).catch(function (error) {
+              console.log(error);
+            });
+            //   .then(function (response) {
+            //     console.log(JSON.stringify(response.data));
+            //   })
+        setLoading(false);
+    }
+    loadData();
+    }, [])    
+
+  if(loading){
+    return(
+        <>Loadingg....</>
+    )
+  } 
+
   return (
-    <>
+    <div className="h-100">
       <table className="text-white leaderboard table table-bordered">
         <thead>
           <tr>
@@ -28,16 +68,20 @@ const LeaderBoard_page = () => {
             <td rowSpan="1">Total score</td>
           </tr>
           <tr>
+            <td></td>
+            <td></td>
             <td>Q1</td>
             <td>Q2</td>
             <td>Q3</td>
             <td>Q4</td>
             <td>Q5</td>
             <td>Q6</td>
+            <td></td>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          
+          {/* <tr>
             <td>1</td>
             <td>KedarKK1</td>
             <td>7</td>
@@ -69,7 +113,7 @@ const LeaderBoard_page = () => {
             <td>76</td>
             <td>53</td>
             <td> 750 </td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
       <Pagination className="d-flex justify-content-center">
@@ -90,7 +134,7 @@ const LeaderBoard_page = () => {
         <Pagination.Last />
       </Pagination>
 
-    </>
+    </div>
   );
 }
 

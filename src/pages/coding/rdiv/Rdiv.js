@@ -17,7 +17,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import { useNavigate } from "react-router-dom";
 var axios = require('axios');
 
-function Rdiv() {
+function Rdiv( props ) {
   let [lang, updatelang] = useState("c_cpp");
   let [theme, utheme] = useState("monokai");
   let cscore = 100;
@@ -59,24 +59,38 @@ function Rdiv() {
       setLoading(true);
 
       // console.log("cookies", cookies.token)
-    
-
-      var formdata = new FormData();
+      var formdata = {};
       if(lang === "c"){
-        formdata.append("language", "c");
-        formdata.append("code", localStorage.getItem("c"))
+        // formdata.append("language", "c");
+        // formdata.append("code", localStorage.getItem("c"))
+        formdata = {
+          language: lang,
+          code: localStorage.getItem(`${lang}`)
+        };
 
       }else if(lang === "Java"){
-        formdata.append("language", "java");
-        formdata.append("code", localStorage.getItem("java"))
+        // formdata.append("language", "java");
+        // formdata.append("code", localStorage.getItem("java"))
+        formdata = {
+          language: lang,
+          code: localStorage.getItem(`${lang}`)
+        };
 
       }else if(lang === "python"){
-        formdata.append("language", "python");
-        formdata.append("code", localStorage.getItem("python"))
+        // formdata.append("language", "python");
+        // formdata.append("code", localStorage.getItem("python"))
+        formdata = {
+          language: lang,
+          code: localStorage.getItem(`${lang}`)
+        };
 
       }else if(lang === "c_cpp"){
-        formdata.append("language", "cpp");
-        formdata.append("code", localStorage.getItem("cpp"))
+        // formdata.append("language", "cpp");
+        // formdata.append("code", localStorage.getItem("cpp"))
+        formdata = {
+          language: lang,
+          code: localStorage.getItem(`${lang}`)
+        };
 
       }else{
         console.log("Please enter correct language")
@@ -85,14 +99,16 @@ function Rdiv() {
 
       var config = {
         method: 'POST',
-        url: `http://localhost:8000/RC/submit/${question.id}`,
+        url: `http://localhost:8000/RC/submit/${props.qnIdParam}`,
         headers: { 
-          'Authorization': `Token ${cookies.token}`
+          'Authorization': `Token ${cookies.token}`,
+          'Content-Type': 'application/json',
         },
-        body: formdata,
+        body: JSON.stringify(formdata),
       };
-      console.log('question.id - ',question.id)
-      fetch(`http://localhost:8000/RC/submit/${question.id}`, config)
+      console.log('question.id - ',props.qnIdParam)
+      console.log('formData - ',JSON.stringify(formdata))
+      fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
@@ -117,7 +133,7 @@ function Rdiv() {
             url: `http://localhost:8000/RC/user`,
             headers: {
                 'Authorization': `Token ${cookies.token}`
-            }
+            },
         };
 
         const questionsList = await axios(config)
@@ -133,6 +149,12 @@ function Rdiv() {
     }
     loadData();
 }, [])
+
+function onChange(newValue) {
+  // console.log("change", newValue);
+  localStorage.setItem(`${lang}`, newValue);
+}
+
 
 if (loading) {
     return (
@@ -169,7 +191,9 @@ if (loading) {
         <AceEditor
           mode={lang}
           value={ userInpText }
-          onChange={ (e)=>{setUserInpText(e)} }
+          // onChange={ (e)=>{setUserInpText(e)} }
+          onChange={onChange}
+
           theme={theme}
           name="UNIQUE_ID_OF_DIV"
           style={{ height: "100%", width: "100%", backgroundColor: cdc }}

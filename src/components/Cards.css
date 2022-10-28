@@ -111,6 +111,7 @@
     height: 4vh;
     border-radius: 25px;
     background: crimson;
+    max-width: 55%;
   }
 
   progress[value] {

@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Container, Image } from 'react-bootstrap';
 import ResultPage from './pages/ResultPage';
 // import Submission_page from './pages/Submission_page';
-// import LeaderBoard_page from './pages/LeaderBoard_page';
+import LeaderBoard_page from './pages/LeaderBoard_page';
 import QuestionHubPage from './pages/QuestionHubPage';
 import Coding from './pages/coding/Coding';
 import Loginpage from './pages/Login_page';
-import Leaderboard from './components/Leaderboard/Leaderboard';
+// import Leaderboard from './components/Leaderboard/Leaderboard';
 import Instructions from './components/Instructions/Instructions';
 import Submissions from './components/Submissions/Submissions';
 import pisbLogo from './images/pisblogo.png';
@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom"
 import './App.css';
 import RequireAuth from './components/RequireAuth';
 import { useEffect } from 'react';
+import TestCases from './components/Test Cases/TestCases';
 
 function App() {
   // const [cookies, setCookie] = useCookies();
@@ -46,7 +47,7 @@ function App() {
     // return route.path
     
   useEffect(() => {
-    console.log(location.pathname)
+    // console.log(location.pathname)
   }, [location])
   
     
@@ -120,9 +121,10 @@ function App() {
             <Route path="/question_hub/:id" element={<Coding />} >
             </Route>
             {/* <Route path="/submission" element={<Submission_page />} /> */}
-            <Route path="/submission" element={<Submissions />} />
-            {/* <Route path="/leaderboard" element={<LeaderBoard_page />} /> */}
-            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/submission/:id" element={<Submissions />} />
+            <Route path="/testcase/:id" element={<TestCases />} />
+            <Route path="/leaderboard" element={<LeaderBoard_page />} />
+            {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
           </Route>
         </Routes>
       </div>

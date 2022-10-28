@@ -4,23 +4,29 @@ import './ldiv.css';
 // import AceEditor from "react-ace";
 import { useCookies } from "react-cookie";
 import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 var axios = require('axios');
 
-function Ldiv() {
+function Ldiv( props ) {
     //    let [qdisp,updateq]=useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
-    let [qdisp] = useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
-    const [state, setState] = useState(5);
+    // let [qdisp] = useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
+    const [state, setState] = useState(props.qnIdParam);
     const [cookies, setCookies] = useCookies(["token"]);
     const [loading, setLoading] = useState(false);
     const [question, setQuestion] = useState([])
-    // const activeIndex = 2;
+    const navigate = useNavigate();
     useEffect(() => {
         const loadData = async () => {
             setLoading(true);
-            console.log("cookies", cookies.token)
+            console.log('params', props.qnIdParam)
+            // console.log("location", location);
+            // const myArray = location2.pathname.split("/question_hub/");
+            // let qnId = myArray[1];
+            // console.log("qnId ", qnId);
+            console.log("cookies", `http://localhost:8000/RC/question/${props.qnIdParam}`)
             var config = {
                 method: 'get',
-                url: `http://localhost:8000/RC/question/1`,
+                url: `http://localhost:8000/RC/question/${props.qnIdParam}`,
                 headers: {
                     'Authorization': `Token ${cookies.token}`
                 }
@@ -60,7 +66,7 @@ function Ldiv() {
                 <Col className="mt-1 h-100">
                     <Pagination>
                         {[...Array(6).keys()].map((x) => (
-                            <Pagination.Item key={x + 1} active={x + 1 === state} onClick={() => { setState(x + 1) }} >{x + 1}</Pagination.Item>
+                            <Pagination.Item key={x + 1} active={props.qnIdParam == x+1} onClick={() => { navigate(`/question_hub/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
                         ))}
                     </Pagination>
                 </Col>
@@ -91,7 +97,7 @@ function Ldiv() {
                             {/* Chef's coding class is very famous in Chefland.
 
                             This year X students joined his class and each student will require one chair to sit on. Chef already has Y chairs in his class. Determine the minimum number of new chairs Chef must buy so that every student is able to get one chair to sit on. */}
-                            {question.description}
+                            Description - {question.description}
                             <br />
                             <b><h4><u>Input Format</u> - </h4></b>
                             {/* The first line contains a single integer T — the number of test cases. Then the test cases follow.
@@ -118,7 +124,7 @@ function Ldiv() {
             {/* <div className="row ipop bg-t">  */}
             <Card className='row ipop bg-t'>
                 <Card className="col-md-6 inp bg-t b-2">
-                    <div className='bg-b c-w'><h5>Custom Input</h5></div>
+                    <div className='bg-b'><h5>Custom Input</h5></div>
                     <textarea name="" id="" className='inpt bg-t c-w br-2'>{question.sample_input}</textarea>
                 </Card>
                 <Card className='col-md-6 out bg-t b-2 '>

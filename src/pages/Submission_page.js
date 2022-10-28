@@ -2,6 +2,9 @@ import React from 'react'
 import { Table, Button, ProgressBar, Pagination } from 'react-bootstrap';
 
 const Submission_page = () => {
+  const [cookies] = useCookies(["token"]);
+  const [loading, setLoading] = useState(false);
+  const [questions, setQuestions] = useState([]);
   const now = 60;
   const now2 = 10;
   const now3 = 90;
@@ -14,6 +17,38 @@ for (let number = 1; number <= 5; number++) {
       {number}
     </Pagination.Item>,
   );
+}
+
+useEffect(() => {
+  const loadData = async () =>{
+      setLoading(true);
+      console.log("cookies", cookies.token)
+      var config = {
+          method: 'get',
+          url: 'http://localhost:8000/RC/submission',
+          headers: { 
+            'Authorization': `Token ${cookies.token}`
+          }
+        };
+        
+      const questionsList = await axios(config)
+      //   .catch(function (error) {
+      //       console.log(error);
+      //     });
+      console.log('questionsList',questionsList.data)
+          //   .then(function (response) {
+          //     console.log(JSON.stringify(response.data));
+          //   })
+      setQuestions(questionsList.data);
+      setLoading(false);
+  }
+  loadData();
+  }, [cookies.token])    
+
+if(loading){
+  return(
+      <>Loadingg....</>
+  )
 }
 
   return (
