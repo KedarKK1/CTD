@@ -82,7 +82,7 @@ function App() {
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={4} href="/result"><button className="myButtonNavBar" onClick={handleLogOut}><i className="fa fa-sign-out" aria-hidden="true"></i> LOG OUT</button></Nav.Link>
                 </> : <> 
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={1} href="/question_hub"><span><i className="fa fa-list-alt px-1" aria-hidden="true" /></span>QUESTION HUB</Nav.Link>
-                  <Nav.Link className="d-flex align-items-center navbarFont" eventKey={2} href="/submission"><i className="fa fa-file-code px-1" aria-hidden="true" />SUBMISSIONS</Nav.Link>
+                  <Nav.Link className="d-flex align-items-center navbarFont" eventKey={2} href="/submission/1"><i className="fa fa-file-code px-1" aria-hidden="true" />SUBMISSIONS</Nav.Link>
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={3} href="/leaderboard"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />LEADERBOARD</Nav.Link>
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={4} href="/result"><button className="myButtonNavBar" onClick={handleLogOut}><i className="fa fa-sign-out" aria-hidden="true"></i> LOG OUT</button></Nav.Link>
                 </> 

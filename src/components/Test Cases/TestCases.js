@@ -56,8 +56,8 @@ if(loading){
                 <Col xxl={4} lg={4} md={4} sm={12} xs={12}>
                     <Row className="h-100">
                         {/* <Card border="light" style={{ width: '18rem' }}> */}
-                        <Card border="success" bg="light" className="my-auto mx-auto" style={{ width: '18rem' }}>
-                            <Card.Header ><h2>Console</h2></Card.Header>
+                        <Card border="light" bg="dark" className="my-auto mx-auto text-white" style={{ width: '18rem' }}>
+                            <Card.Header style={{ borderBottom: '1px solid white'}} ><h2>Console</h2></Card.Header>
                             <Card.Body>
                                 {/* <Card.Title>Light Card Title</Card.Title> */}
                                 <Card.Text>
@@ -75,8 +75,8 @@ if(loading){
                         {/* <Card border="light" style={{ width: '18rem' }}> */}
                         <Row className="px-3">
                             <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
-                                <Card border="success" bg="light" style={{ width: '15rem' }} className="px-2">
-                                    <Card.Header ><h5>Test case 1</h5></Card.Header>
+                                <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white">
+                                    <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case 1</h5></Card.Header>
                                     <Card.Body>
                                         <Card.Text>
                                             <span> <Image src={rightSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Passed </span>
@@ -85,8 +85,8 @@ if(loading){
                                 </Card>
                             </Col>
                             <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
-                                <Card border="success" bg="light" style={{ width: '15rem' }} className="px-2">
-                                    <Card.Header ><h5>Test case 2</h5></Card.Header>
+                                <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white">
+                                    <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case 2</h5></Card.Header>
                                     <Card.Body>
                                         <Card.Text>
                                             <span> <Image src={wrongeSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Failed </span>
@@ -95,8 +95,8 @@ if(loading){
                                 </Card>
                             </Col>
                             <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
-                                <Card border="success" bg="light" style={{ width: '15rem' }} className="px-2">
-                                    <Card.Header ><h5>Test case 3</h5></Card.Header>
+                                <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white">
+                                    <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case 3</h5></Card.Header>
                                     <Card.Body>
                                         <Card.Text>
                                             <span> <Image src={rightSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Passed </span>
@@ -105,8 +105,8 @@ if(loading){
                                 </Card>
                             </Col>
                             <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
-                                <Card border="success" bg="light" style={{ width: '15rem' }} className="px-2">
-                                    <Card.Header ><h5>Test case 4</h5></Card.Header>
+                                <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white ">
+                                    <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case 4</h5></Card.Header>
                                     <Card.Body>
                                         <Card.Text>
                                             <span> <Image src={rightSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Passed </span>
