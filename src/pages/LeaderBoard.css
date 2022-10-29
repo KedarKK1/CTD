@@ -10,6 +10,14 @@
     border-top-left-radius: 15px !important;
 }
 
+.giveHt{
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow-x: scroll;
+}
 
   *{
     /* background-color: #282c34; */

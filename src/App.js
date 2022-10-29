@@ -79,13 +79,13 @@ function App() {
                   <Nav.Link disabled className="d-flex align-items-center navbarFont" eventKey={1} href="/question_hub"><span><i className="fa fa-list-alt px-1" aria-hidden="true" /></span>QUESTION HUB</Nav.Link>
                   <Nav.Link disabled className="d-flex align-items-center navbarFont" eventKey={2} href="/submission"><i className="fa fa-file-code px-1" aria-hidden="true" />SUBMISSIONS</Nav.Link>
                   <Nav.Link disabled className="d-flex align-items-center navbarFont" eventKey={5} href="/testcase/1"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />TEST CASES</Nav.Link>
-                  <Nav.Link disabled className="d-flex align-items-center navbarFont" eventKey={3} href="/leaderboard"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />LEADERBOARD</Nav.Link>
+                  <Nav.Link disabled className="d-flex align-items-center navbarFont" eventKey={3} href="/leaderboard/1"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />LEADERBOARD</Nav.Link>
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={4} href="/result"><button className="myButtonNavBar" onClick={handleLogOut}><i className="fa fa-sign-out" aria-hidden="true"></i> LOG OUT</button></Nav.Link>
                 </> : <> 
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={1} href="/question_hub"><span><i className="fa fa-list-alt px-1" aria-hidden="true" /></span>QUESTION HUB</Nav.Link>
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={2} href="/submission/1"><i className="fa fa-file-code px-1" aria-hidden="true" />SUBMISSIONS</Nav.Link>
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={5} href="/testcase/1"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />TEST CASES</Nav.Link>
-                  <Nav.Link className="d-flex align-items-center navbarFont" eventKey={3} href="/leaderboard"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />LEADERBOARD</Nav.Link>
+                  <Nav.Link className="d-flex align-items-center navbarFont" eventKey={3} href="/leaderboard/1"><i className="fa fa-duotone fa-flag-checkered px-1" aria-hidden="true" />LEADERBOARD</Nav.Link>
                   <Nav.Link className="d-flex align-items-center navbarFont" eventKey={4} href="/result"><button className="myButtonNavBar" onClick={handleLogOut}><i className="fa fa-sign-out" aria-hidden="true"></i> LOG OUT</button></Nav.Link>
                 </> 
                 }
@@ -125,7 +125,7 @@ function App() {
             {/* <Route path="/submission" element={<Submission_page />} /> */}
             <Route path="/submission/:id" element={<Submissions />} />
             <Route path="/testcase/:id" element={<TestCases />} />
-            <Route path="/leaderboard" element={<LeaderBoard_page />} />
+            <Route path="/leaderboard/:id" element={<LeaderBoard_page />} />
             {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
           </Route>
         </Routes>
