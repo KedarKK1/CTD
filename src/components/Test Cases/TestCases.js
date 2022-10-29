@@ -9,45 +9,33 @@ import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-const TestCases = () => {
+const TestCases = ( state ) => {
     const [cookies, setCookies] = useCookies(["token"]);
-    const [loading, setLoading] = useState(false);
-    const [questions, setQuestions] = useState([]);
-    
-    const params = useParams();
-    console.log("qn Testcase Id: ", params.id);
+    const [loading, setLoading] = useState(true);
+    const [questions, setQuestions] = useState({
+        "cases": [],
+        "error": ""
+    });
 
     useEffect(() => {
-        const loadData = async () =>{
-            setLoading(true);
-            console.log("cookies", cookies.token)
-            var config = {
-                method: 'get',
-                url: 'http://localhost:8000/RC/question',
-                headers: { 
-                  'Authorization': `Token ${cookies.token}`
-                }
-              };
-              
-            const questionsList = await axios(config)
-            //   .catch(function (error) {
-            //       console.log(error);
-            //     });
-            console.log('questionsList',questionsList.data)
-                //   .then(function (response) {
-                //     console.log(JSON.stringify(response.data));
-                //   })
-            setQuestions(questionsList.data);
-            setLoading(false);
-        }
-        loadData();
-        }, [cookies.token])    
+        setLoading(true);
+        setQuestions(state);
+        console.log("porps result in useEff: ", state);
+        console.log("qn cases in useEff: ", questions.cases);
+        setLoading(false);
+    }, [state])
 
-if(loading){
-    return(
-        <>Loadingg....</>
-    )
-}
+    console.log("porps result: ", state);
+    
+    // const params = useParams();
+    // console.log("params result: ", params);
+
+    if (loading) {
+        return (
+            <>Loadingg....</>
+        )
+    }
+    
 
     return (
         <Container fluid>
@@ -61,9 +49,10 @@ if(loading){
                             <Card.Body>
                                 {/* <Card.Title>Light Card Title</Card.Title> */}
                                 <Card.Text>
-                                    Some quick example text to build on the card title and make up the
+                                    {/* Some quick example text to build on the card title and make up the
                                     bulk of the card's content.
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. */}
+                                    {(questions.error) ? questions.error : "Compiled Successfully"}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -74,7 +63,7 @@ if(loading){
                         <h2 className="my-auto mx-auto text-light">Test cases</h2>
                         {/* <Card border="light" style={{ width: '18rem' }}> */}
                         <Row className="px-3">
-                            <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
+                            {/* <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
                                 <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white">
                                     <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case 1</h5></Card.Header>
                                     <Card.Body>
@@ -113,7 +102,23 @@ if(loading){
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                            </Col>
+                            </Col> */}
+
+                            {questions.cases && questions.cases.map((res, idx)=>{
+                                return(
+                                    <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
+                                        <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white ">
+                                            <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case {idx}</h5></Card.Header>
+                                            <Card.Body>
+                                                <Card.Text>
+                                                    <span> <Image src={(res=="AC") ? rightSymbol2 : wrongeSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Passed </span>
+                                                </Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                )
+                            })}
+                            {(!questions.cases) ? <div className='text-white'>No Test Cases Received</div> : <></>}
                         </Row>
                     </Row>
                 </Col>

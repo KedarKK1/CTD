@@ -62,18 +62,32 @@ function Rdiv( props ) {
     console.log(e.target.value);
     // console.log(theme);
   }
+  const calcInput = async (dataArr) => {
+    var codeInput = " ";
+    for await (const str of dataArr){
+      codeInput += (" "+str+" ");
+    } 
+    return codeInput;
+  }
   const submitInput = () =>{
     try {
       setLoading(true);
 
       // console.log("cookies", cookies.token)
       var formdata = {};
+
+      const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
+      var codeInput = " ";
+      codeInput = calcInput(myCodeArr)
       if(lang === "c"){
         // formdata.append("language", "c");
         // formdata.append("code", localStorage.getItem("c"))
+
+
+        // codeInput = +calcInput();
         formdata = {
           language: lang,
-          code: localStorage.getItem(`${lang}`)
+          code: myCodeArr.join(" ")
         };
 
       }else if(lang === "python"){
@@ -81,15 +95,15 @@ function Rdiv( props ) {
         // formdata.append("code", localStorage.getItem("python"))
         formdata = {
           language: lang,
-          code: localStorage.getItem(`${lang}`)
+          code: myCodeArr.join(" ")
         };
 
       }else if(lang === "c_cpp"){
         // formdata.append("language", "cpp");
         // formdata.append("code", localStorage.getItem("cpp"))
         formdata = {
-          language: "cpp",
-          code: localStorage.getItem(`${lang}`)
+          language: "c++",
+          code: myCodeArr.join(" ")
         };
 
       }else{
@@ -108,13 +122,20 @@ function Rdiv( props ) {
       };
       console.log('question.id - ',props.qnIdParam)
       console.log('formData - ',JSON.stringify(formdata))
+      let result;
       fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result2 => {console.log('result2',result2); result = result2; 
+        navigate(`/testcase/${props.qnIdParam}`, {state: {
+          "cases": [
+              "AC"
+          ],
+          "error": "na"
+      }})
+      })
         .catch(error => console.log('error', error));
       setLoading(false);
       //! look at below navigation if ./sub or /sub or sub only
-      navigate('/submission')
     } catch (err) {
       console.log('err',err);
     }
@@ -136,9 +157,9 @@ function Rdiv( props ) {
         };
 
         const questionsList = await axios(config)
-        //   .catch(function (error) {
-        //       console.log(error);
-        //     });
+          .catch(function (err) {
+              console.log('err',err);
+            });
         console.log('questionsList', questionsList.data)
         //   .then(function (response) {
         //     console.log(JSON.stringify(response.data));
