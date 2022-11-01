@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-const TestCases = ( state ) => {
+const TestCases = (state) => {
     const [cookies, setCookies] = useCookies(["token"]);
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState({
@@ -26,7 +26,7 @@ const TestCases = ( state ) => {
     }, [state])
 
     console.log("porps result: ", state);
-    
+
     // const params = useParams();
     // console.log("params result: ", params);
 
@@ -35,7 +35,7 @@ const TestCases = ( state ) => {
             <>Loadingg....</>
         )
     }
-    
+
 
     return (
         <Container fluid>
@@ -45,7 +45,7 @@ const TestCases = ( state ) => {
                     <Row className="h-100">
                         {/* <Card border="light" style={{ width: '18rem' }}> */}
                         <Card border="light" bg="dark" className="my-auto mx-auto text-white" style={{ width: '18rem' }}>
-                            <Card.Header style={{ borderBottom: '1px solid white'}} ><h2>Console</h2></Card.Header>
+                            <Card.Header style={{ borderBottom: '1px solid white' }} ><h2>Console</h2></Card.Header>
                             <Card.Body>
                                 {/* <Card.Title>Light Card Title</Card.Title> */}
                                 <Card.Text>
@@ -104,14 +104,14 @@ const TestCases = ( state ) => {
                                 </Card>
                             </Col> */}
 
-                            {questions.cases && questions.cases.map((res, idx)=>{
-                                return(
+                            {questions.cases && questions.cases.map((res, idx) => {
+                                return (
                                     <Col xxl={4} xl={4} lg={4} md={4} sm={6} xs={12} className="">
                                         <Card border="light" bg="dark" style={{ width: '15rem' }} className=" px-2 text-white ">
-                                            <Card.Header style={{ borderBottom: '1px solid white'}} ><h5>Test case {idx}</h5></Card.Header>
+                                            <Card.Header style={{ borderBottom: '1px solid white' }} ><h5>Test case {idx}</h5></Card.Header>
                                             <Card.Body>
                                                 <Card.Text>
-                                                    <span> <Image src={(res=="AC") ? rightSymbol2 : wrongeSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Passed </span>
+                                                    <span> <Image src={(res == "AC") ? rightSymbol2 : wrongeSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> Passed </span>
                                                 </Card.Text>
                                             </Card.Body>
                                         </Card>
