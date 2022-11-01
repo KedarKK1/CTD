@@ -40,7 +40,7 @@ const LeaderBoard_page = () => {
           };
           
         const questionsList = await axios(config).then(res => {
-          // console.log('res.data',res.data.results) 
+          console.log('res.data',res.data.results) 
           const datas = [...res.data.results]
           setQuestions(data =>[...datas]);
           console.log('datas',datas)

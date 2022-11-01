@@ -32,7 +32,7 @@ const Cards = (props) => {
                             </Col>
                         </Row>
                         <Row className="mb-2">
-                            <h6 className="d-inline pe-2 mb-0">Attempts : <b>{props.questions.total_submissions}</b></h6>
+                            <h6 className="d-inline pe-2 mb-0">Current Submissions : <b>{props.questions.total_submissions}</b></h6>
                         </Row>
                         <button className="myButtonQnHub"><a href={`question_hub/${props.index}`} >Attempt</a></button>
                     </figcaption>

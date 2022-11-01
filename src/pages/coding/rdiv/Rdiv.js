@@ -79,20 +79,19 @@ function Rdiv( props ) {
 
       // const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
       const myCodeArr =   localStorage.getItem(`${lang}`);
-      var codeInput = " ";
-      codeInput = calcInput(myCodeArr)
+      // var codeInput = " ";
+      // codeInput = calcInput(myCodeArr)
       // var fcode=myCodeArr.join("    ")
       if(lang === "c"){
-        // formdata.append("language", "c");
-        // formdata.append("code", fcode)
+        formdata.append("language", "c");
+        formdata.append("code", myCodeArr)
 
-
-        codeInput = +calcInput();
-        formdata = {
-          // code: myCodeArr.join(" "),
-          code: myCodeArr,
-          language: lang,
-        };
+        // codeInput = +calcInput();
+        // formdata = {
+        //   // code: myCodeArr.join(" "),
+        //   code: myCodeArr,
+        //   language: lang,
+        // };
 
       }else if(lang === "python"){
         formdata.append("language", "python");
@@ -133,8 +132,8 @@ function Rdiv( props ) {
         data: formdata 
         
       };
-      console.log('question.id - ',props.qnIdParam)
-      console.log('formData - ',JSON.stringify(formdata))
+      console.log('question.id - ',props.qnIdParam);
+      console.log('formData - ', formdata );
       let result;
       // fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
       //   .then(response => response.text())
@@ -151,6 +150,7 @@ function Rdiv( props ) {
       axios(config)
         .then(function (response) {
           console.log('res data',JSON.stringify(response.data));
+          navigate(`/testcase/${props.qnIdParam}`, { replace: true, state: response.data })
         })
 
         .catch(error => console.log('error', error));

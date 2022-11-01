@@ -21,11 +21,15 @@ const TestCases = ( state ) => {
         setLoading(true);
         setQuestions(state);
         console.log("porps result in useEff: ", state);
-        console.log("qn cases in useEff: ", questions.cases);
+        console.log("porps state.state in useEff: ", state.state);
+        // console.log("state.response.data cases in useEff: ", state.response.data);
         setLoading(false);
     }, [state])
 
-    console.log("porps result: ", state);
+    console.log("porps state.state: ", JSON.stringify(state.state));
+    console.log("porps state.state: ", JSON.stringify(state.cases));
+    console.log("porps state.state: ", JSON.stringify(state.state.cases));
+    console.log("porps state: ", JSON.stringify(state));
     
     // const params = useParams();
     // console.log("params result: ", params);
