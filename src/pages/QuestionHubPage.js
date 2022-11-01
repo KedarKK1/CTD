@@ -24,36 +24,31 @@ const QuestionHubPage = () => {
     // .then(result => console.log(result))
     // .catch(error => console.log('error', error));
 
-    // const questions = [
-    //     {title: "Katya's Maze", Progress: 78, Attempts: 2},
-    //     {title: "Chef's Palindrome", Progress: 25, Attempts: 1},
-    //     {title: "GCD's LCM", Progress: 97, Attempts: 3},
-    //     {title: "Circular Linked Hash", Progress: 35, Attempts: 1},
-    //     {title: "Barinsormer", Progress: 67, Attempts: 5},
-    //     {title: "Natash's Shortest Path", Progress: 45, Attempts: 2},
-    // ] 
-
     useEffect(() => {
         const loadData = async () =>{
             setLoading(true);
             console.log("cookies", cookies.token)
-            var config = {
-                method: 'get',
-                url: 'http://localhost:8000/RC/question',
-                headers: { 
-                  'Authorization': `Token ${cookies.token}`
-                }
-              };
-              
-            const questionsList = await axios(config)
-            //   .catch(function (error) {
-            //       console.log(error);
-            //     });
-            console.log('questionsList',questionsList.data)
-                //   .then(function (response) {
-                //     console.log(JSON.stringify(response.data));
-                //   })
-            setQuestions(questionsList.data);
+            try {
+                var config = {
+                    method: 'get',
+                    url: 'http://localhost:8000/RC/question',
+                    headers: { 
+                      'Authorization': `Token ${cookies.token}`
+                    }
+                  };
+                  
+                const questionsList = await axios(config)
+                  .catch(function (error) {
+                      console.log(error);
+                    });
+                console.log('questionsList',questionsList.data)
+                    //   .then(function (response) {
+                    //     console.log(JSON.stringify(response.data));
+                    //   })
+                setQuestions(questionsList.data);
+            } catch (err) {
+                console.log("err in fetching questions pg: ",err)
+            }
             setLoading(false);
         }
         loadData();
@@ -77,18 +72,7 @@ const QuestionHubPage = () => {
                             </Col>
                         )
                     })}
-                    {/* <Col sm={6} sx={12} md={4} lg={4} xl={4} xxl={4} className="py-2 px-2 myQnHover">
-                        <Cards />
-                    </Col>
-                    <Col sm={6} sx={12} md={4} lg={4} xl={4} xxl={4} className="py-2 px-2 myQnHover">
-                        <Cards />
-                    </Col>
-                    <Col sm={6} sx={12} md={4} lg={4} xl={4} xxl={4} className="py-2 px-2 myQnHover">
-                        <Cards />
-                    </Col>
-                    <Col sm={6} sx={12} md={4} lg={4} xl={4} xxl={4} className="py-2 px-2 myQnHover">
-                        <Cards />
-                    </Col> */}
+                    
                 </Row>
             
         </Container>

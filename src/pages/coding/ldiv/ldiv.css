@@ -37,12 +37,26 @@
     padding: 5px  15px;
     /* margin: 5px; */
 }
+.rbnRun{
+    width: fit-content;
+    /* width: 100%; */
+    /* max-width: 110px; */
+    margin: 0px;
+    height: 66px;
+    /* margin: 5px; */
+}
+
 .rbn{
     width: fit-content;
+    /* width: 100%; */
+    /* max-width: 110px; */
     margin: 0px;
-    height: 36px;
-
+    height: 42px;
     /* margin: 5px; */
+}
+
+.rbn:hover, .rbnRun:hover{
+    background-color: rgb(27, 56, 94)
 }
 #lang {
     height: 100%;
@@ -78,7 +92,7 @@
     border-radius: 5px;
     height: calc(60% - 58px);
     margin-bottom: 15px;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     overflow-x: hidden;
     /* justify-content: center; */
 }
@@ -89,3 +103,42 @@
 /* .ace_editor{
     background-color: black;
 } */
+
+.givePaginationTheme{
+    background-color: transparent;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.myCustomInputCard{
+    border: 2px solid #394d65; 
+    border-radius: 5px;
+    margin-bottom: 5px;
+    overflow-x: hidden;
+    width: calc(100%);
+    height: calc(40% - 28px);
+    /* margin-right: 60px; */
+    text-align: center;
+}
+
+
+.inputBox{
+    text-align: center;
+    border: 1px solid white; 
+    color:white;  
+}
+.inputBoxTitle{
+    background-image: linear-gradient(to top right, #152238 0%, #152238 100%);
+}
+
+.outputBox{
+    text-align: center;
+    border: 1px solid white;
+    color:white;
+}
+
+.outputBoxTitle, .clipboardCopy, .clipboardCopy2 {
+    background-image: linear-gradient(to top right, #152238 0%, #152238 100%);
+    color: white;
+    width: 100%;
+}

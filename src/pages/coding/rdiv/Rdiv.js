@@ -15,6 +15,7 @@ import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
 import { useNavigate } from "react-router-dom";
 var axios = require('axios');
+var FormData = require('form-data');
 
 function Rdiv( props ) {
   let [lang, updatelang] = useState("c_cpp");
@@ -74,66 +75,86 @@ function Rdiv( props ) {
       setLoading(true);
 
       // console.log("cookies", cookies.token)
-      var formdata = {};
+      var formdata = new FormData();
 
-      const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
-      var codeInput = " ";
-      codeInput = calcInput(myCodeArr)
+      // const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
+      const myCodeArr =   localStorage.getItem(`${lang}`);
+      // var codeInput = " ";
+      // codeInput = calcInput(myCodeArr)
+      // var fcode=myCodeArr.join("    ")
       if(lang === "c"){
-        // formdata.append("language", "c");
-        // formdata.append("code", localStorage.getItem("c"))
-
+        formdata.append("language", "c");
+        formdata.append("code", myCodeArr)
 
         // codeInput = +calcInput();
-        formdata = {
-          language: lang,
-          code: myCodeArr.join(" ")
-        };
+        // formdata = {
+        //   // code: myCodeArr.join(" "),
+        //   code: myCodeArr,
+        //   language: lang,
+        // };
 
       }else if(lang === "python"){
-        // formdata.append("language", "python");
-        // formdata.append("code", localStorage.getItem("python"))
-        formdata = {
-          language: lang,
-          code: myCodeArr.join(" ")
-        };
+        formdata.append("language", "python");
+        formdata.append("code", myCodeArr)
+        // formdata = {
+        //   // code: myCodeArr.join("    "),
+        //   code: myCodeArr,
+        //   language: lang,
+        // };
+
+        
 
       }else if(lang === "c_cpp"){
-        // formdata.append("language", "cpp");
-        // formdata.append("code", localStorage.getItem("cpp"))
-        formdata = {
-          language: "c++",
-          code: myCodeArr.join(" ")
-        };
+        formdata.append("language", "c++");
+        formdata.append("code", myCodeArr)
+        // formdata = {
+        //   // code: myCodeArr.join("    "),
+        //   code: myCodeArr,
+        //   language: "c++",
+        // };
 
       }else{
         console.log("Please enter correct language")
       }
       // formdata.append("code", `${userInpText}`)
-
+      
+      // formdata=window.FormData
+      // myHeader = formdata.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' };
       var config = {
         method: 'POST',
         url: `http://localhost:8000/RC/submit/${props.qnIdParam}`,
         headers: { 
           'Authorization': `Token ${cookies.token}`,
-          'Content-Type': 'application/json',
+          // 'Content-Type': `multipart/form-data;boundary=${formdata._boundary}` 
         },
-        body: JSON.stringify(formdata),
+        // withAuthentication:true,
+        // body: JSON.stringify(formdata),
+        data: formdata 
+        
       };
-      console.log('question.id - ',props.qnIdParam)
-      console.log('formData - ',JSON.stringify(formdata))
+      console.log('question.id - ',props.qnIdParam);
+      console.log('formData - ', formdata );
       let result;
-      fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
-        .then(response => response.text())
-        .then(result2 => {console.log('result2',result2); result = result2; 
-        navigate(`/testcase/${props.qnIdParam}`, {state: {
-          "cases": [
-              "AC"
-          ],
-          "error": "na"
-      }})
-      })
+      // fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
+      //   .then(response => response.text())
+      //   .then(result2 => {result = result2; 
+      //   console.log(JSON.stringify(result2))
+      // //   navigate(`/testcase/${props.qnIdParam}`, {state: {
+      // //     "cases": [
+      // //         "AC"
+      // //     ],
+      // //     "error": "na"
+      // // }})
+      // })
+
+      axios(config)
+        .then(function (response) {
+          console.log('res data',JSON.stringify(response.data));
+          navigate(`/testcase/${props.qnIdParam}`, { replace: true, state: response.data })
+        })
+
         .catch(error => console.log('error', error));
+
       setLoading(false);
       //! look at below navigation if ./sub or /sub or sub only
     } catch (err) {
@@ -142,9 +163,9 @@ function Rdiv( props ) {
   }
 
   useEffect(() => {
-    localStorage.setItem('c', `// Enter your solution here \n`)
+    localStorage.setItem('c', ` `)
     localStorage.setItem('c_cpp', `#include <iostream> \n using namespace std; \n int main(){ \n int t; cin>>t;  \n  cout<<"Hello"; \n return 0; \n}`)
-    localStorage.setItem('python', `# Enter your solution here \n`)
+    localStorage.setItem('python', ` `)
     const loadData = async () => {
         setLoading(true);
         console.log("cookies", cookies.token)
@@ -231,9 +252,9 @@ if (loading) {
         />
       </Card>
       <Card className="rtopnav rbottomnav bg-t">
-        <div >
+        {/* <div >
           <button className="rbn rbn1 bg-t  b-1 c-w br-2 pd-lr-15"><span><i class="fa-solid fa-play"></i> </span>Run</button>
-        </div>
+        </div> */}
         <div >
           <button className="rbn rbn2 bg-t  b-1 c-w br-2 pd-lr-15">Load Buffer</button>
         </div>

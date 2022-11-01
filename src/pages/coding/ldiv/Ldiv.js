@@ -5,6 +5,11 @@ import './ldiv.css';
 import { useCookies } from "react-cookie";
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import InputBox from './InputBox';
+import OutputBox from './OutputBox';
+import LBottom from './LBottom';
+import InputBoxWithProps from './InputBoxWithProps';
+import OutputBoxWithProps from './OutputBoxWithProps';
 var axios = require('axios');
 
 function Ldiv( props ) {
@@ -46,6 +51,10 @@ function Ldiv( props ) {
         loadData();
     }, [])
 
+    const findOutput = async () => {
+
+    }
+
     if (loading) {
         return (
             <>Loadingg....</>
@@ -66,7 +75,7 @@ function Ldiv( props ) {
                 <Col className="mt-1 h-100">
                     <Pagination >
                         {[...Array(6).keys()].map((x) => (
-                            <Pagination.Item  key={x + 1} active={props.qnIdParam == x+1} onClick={() => { navigate(`/question_hub/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
+                            <Pagination.Item  key={x + 1} className="givePaginationTheme" active={props.qnIdParam == x+1} onClick={() => { if(x+1 != props.qnIdParam){navigate(`/question_hub/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
                         ))}
                     </Pagination>
                 </Col>
@@ -99,7 +108,7 @@ function Ldiv( props ) {
                             This year X students joined his class and each student will require one chair to sit on. Chef already has Y chairs in his class. Determine the minimum number of new chairs Chef must buy so that every student is able to get one chair to sit on. */}
                             Description - {question.description}
                             <br />
-                            <b><h4><u>Input Format</u> - </h4></b>
+                            <b><h4><u>Input Constrains</u> - </h4></b>
                             {/* The first line contains a single integer T — the number of test cases. Then the test cases follow.
                             The first and only line of each test case contains two integers X and Y — the number of students in the class and the number of chairs Chef already has. */}
                             {/* <ul>{question.input_format.map((item) => {
@@ -113,26 +122,76 @@ function Ldiv( props ) {
                             )})}
                             </ul> */}
                             <br />
-                            <b><h4><u>Output Format</u> - </h4></b>
+                            <b><h4><u>Output Constrains</u> - </h4></b>
                             {/* For each test case, output the minimum number of extra chairs Chef must buy so that every student gets one chair. */}
-                            <ul>{question.output_format}</ul>
+                            {/* TODO */}
+                            {/* <ul>{question.output_format}</ul>
+                            <b><h4><u>Input Format</u> - </h4></b>
+                            <ul>{question.sample_input}</ul>
+                            <b><h4><u>Output Format</u> - </h4></b>
+                            <ul>{question.sample_output}</ul> */}
+                            <div className="row">
+                                <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                                    <InputBoxWithProps input={question.sample_input}  />
+                                </div>
+                                <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                                    <OutputBoxWithProps output={question.sample_output} />
+                                </div>
+                            </div>
+                            
                         </Card.Text>
                     </Card.Body>
                 </Card>
 
             </div>
             {/* <div className="row ipop bg-t">  */}
-            <Card className='row ipop bg-t'>
-                <Card className="col-md-6 inp bg-t b-2">
+            {/* <Card className='row ipop bg-t'>
+                 <Card className="col-md-6 inp bg-t b-2">
                     <div className='bg-b'><h5>Custom Input</h5></div>
-                    <textarea name="" id="" className='inpt bg-t c-w br-2'>{question.sample_input}</textarea>
+                    <textarea name="" id="" className='inpt bg-t c-w br-2'></textarea>
+                </Card> 
+                <Card className="col-md-6 out bg-t b-2 d-flex align-items-center justify-content-center border-0">
+                    <InputBox className=" mt-2 "  />
                 </Card>
-                <Card className='col-md-6 out bg-t b-2 '>
-                    <div className='bg-b c-w'><h5>Custom Output</h5></div>
-                    <textarea name="" id="" className='outt bg-t c-w br-2' readOnly>{question.sample_output}</textarea>
+                <Card className='col-md-6 out bg-t b-2 d-flex align-items-center justify-content-center border-0'>
+                     <div className='bg-b c-w'><h5>Custom Output</h5></div>
+                    <textarea name="" id="" className='outt bg-t c-w br-2' readOnly>{question.sample_output}</textarea> 
+                    <OutputBox className=' mt-2 ' />
                 </Card>
+            </Card> */}
+            {/* <Card className="row myCustomInputCard">
+                <LBottom />
+            </Card> */}
+            <div className="row my-2 QuestionBox">
+
+{/* <Card className='qdisp bg-t b-2'>
+<textarea name="" className='qdispt bg-t c-w 'id="qdispt" readOnly>{qdisp}</textarea>
+</Card> */}
+        <Card className="myQuestionCard2">
+            <Card.Body >
+                <Card.Text className="row d-flex flex-row justify-content-center">
+            {/* <Card className="col-md-6 inp bg-t b-2">
+                <div className='bg-b'><h5>Custom Input</h5></div>
+                <textarea name="" id="" className='inpt bg-t c-w br-2'></textarea>
+            </Card> */}
+            <Card className="col-12 col-sm-9 col-sx-4 col-md-4 col-lg-4 bg-t b-2 border-0">
+                <InputBox />
             </Card>
+            <Card className="col-2 col-sm-2 col-sx-2 col-md-2 col-lg-2 bg-t b-2 border-0">
+              <button className="rbnRun bg-t  b-1 c-w br-2 pd-lr-15" onClick={findOutput}><span><i class="fa-solid fa-play"></i> </span>Run</button>
+            </Card>
+            <Card className='col-12 col-sm-12 col-sx-4 col-md-4 col-lg-4 bg-t b-2 border-0'>
+                {/* <div className='bg-b c-w'><h5>Custom Output</h5></div>
+                <textarea name="" id="" className='outt bg-t c-w br-2' readOnly>{question.sample_output}</textarea> */}
+                <OutputBox />
             {/* </div> */}
+        </Card>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+
+    </div>
+
         </Card>
     )
 }

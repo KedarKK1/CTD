@@ -1,5 +1,6 @@
 .sub {
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .hidelabel{
@@ -36,7 +37,7 @@
   text-align: center;
 }
 .sview {
-  width: 18.5vw;
+  width: 12.5vw;
 }
 .btn {
   color: #ffffff !important;
@@ -73,6 +74,8 @@
 }
 .ques {
   margin-top: 3vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .radio input[type="radio"] {
   opacity: 0;

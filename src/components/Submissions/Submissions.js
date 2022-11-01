@@ -16,50 +16,18 @@ const Submissions = () => {
     // const [qdetails, setQdetails] = useState([
     //     {id:1, time:'00:00', progress:10 },
     //     {id:2, time:'00:00', progress:70 },]);
-    const [qdetails, setQdetails] = useState([{
-        "id": 9,
-        "q_id": {
-          "id": 2,
-          "score": 12,
-          "code": "print(int(input())-35)",
-          "language": "python",
-          "title": "Subtract 35 and give the results to compiler",
-          "body": "Great question comes from great Minds\r\nSubtract 35 from the given integer and return your ans to submit it to console for processing",
-          "description": "Subtract 35 & give results",
-          "input_format": "t -> no. of test cases followed\r\ni -> integer",
-          "output_format": "j -> integers",
-          "constraints": "1<=t<=100\r\n1<=i<=120",
-          "sample_input": "3\r\n55\r\n70\r\n25",
-          "sample_output": "20\r\n35\r\n-10",
-          "explaination": "Test case 1 => 55 - 35 = 20\r\nTest case 2 => 70 - 35 = 35\r\nTest case 3 => 25 - 35 = -10",
-          "correct_submissions": 0,
-          "total_submissions": 0,
-          "accuracy": 0,
-          "time_limt": 1,
-          "memory_limit": 256
-        },
-        "p_id": {
-          "id": 1,
-          "last_login": "2022-10-29T13:50:15.927915+05:30",
-          "is_superuser": true,
-          "username": "admin",
-          "first_name": "",
-          "last_name": "",
-          "email": "",
-          "is_staff": true,
-          "is_active": true,
-          "date_joined": "2022-09-26T15:32:52.688234+05:30",
-          "total_score": -26,
-          "groups": [],
-          "user_permissions": []
-        },
-        "time": "2022-10-29T12:21:13.930376+05:30",
-        "code": "print(int(input()) + 10)",
-        "status": "WA",
-        "language": "python"
-      }]);
+    const [qdetails, setQdetails] = useState([]);
+    const [qdetailLen, setQdetailLen] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState([{
+        code: "print(int(input()))",
+        id: 1,
+        language: "python",
+        p_id: 1,
+        q_id: 1,
+        status: "WA",
+        time: "2022-10-26T20:59:16.641836+05:30",
+    }]);
 
     const [cookies, setCookies] = useCookies(["token"]);
 
@@ -74,23 +42,51 @@ const Submissions = () => {
                 console.log("cookies", cookies.token)
                 var config = {
                     method: 'get',
-                    // url: `http://localhost:8000/RC/submission/${params.id}`,
-                    url: `http://localhost:8000/RC/submission`,
+                    url: `http://localhost:8000/RC/submission/${params.id}`,
+                    // url: `http://localhost:8000/RC/submission`,
                     headers: { 
                       'Authorization': `Token ${cookies.token}`,
                     }
                   };
                   
                 try {
-                    const questionsList = await axios(config)
+                    const questionsList = await axios(config).then((res)=>{
+                        console.log('res.data.result',res.data.results)
+                        setQuestions(res.data.results);
+                        setQdetailLen(res.data.results.length)
+                        // res.data.results.map((a)=>{
+                        //     return(
+                        //         setQdetails(qdetails2=>[
+                        //             ...qdetails2,
+                        //             {   code: a.code,
+                        //                 id: a.id,
+                        //                 language: a.language,
+                        //                 p_id: a.p_id,
+                        //                 q_id: a.q_id,
+                        //                 status: a.status,
+                        //                 time: a.time,
+                        //              }]
+                        //             )
+                        //     )
+                        // })
+
+                        setQdetails(qdetails=>[...qdetails,...res.data.results])
+
+                        console.log('qdetails  ',qdetails)
+                        // console.log('promise ',Promise.all(moviePromises));
+                    })
                     //   .catch(function (error) {
                     //       console.log(error);
                     //     });
-                    console.log('questionsList',questionsList.data)
+                    // console.log('questionsList',questionsList.data.results)
                         //   .then(function (response) {
                         //     console.log(JSON.stringify(response.data));
                         //   })
-                    // setQuestions(questionsList.data);
+                    let result1=[]
+                    // result1=[...result1,...questionsList.data.results]
+                    // console.log('result1  ',result1)
+                    // setQuestions(...questions,result1);
+                    console.log('questions  ',questions)
                 } catch (err) {
                     console.log("err in submission", err)
                 }
@@ -132,7 +128,7 @@ const Submissions = () => {
                 <QueCard qno={params.id} />
                 {qdetails.map((que, idx) => (
                     <div className="que-preview" key={idx}>
-                    {que.id!==0 && <SubCard
+                    {que.id!==0 && idx+1<=qdetailLen && <SubCard
                     // attemptNo={que.id}
                     // attemptNo={idx+1 + 10*(params.id-1)}
                     attemptNo={idx+1}
@@ -142,13 +138,13 @@ const Submissions = () => {
                         // now={70}
                         now={ que.status=="AC" ? 100 : 0 }
                     />}
-                
+                    submittedCode={que.code}
                     />}
                 </div>       
                 ))}
             </div>
 
-
+                        
             <div className="space"></div>
         </div>
     );

@@ -22,7 +22,8 @@ const Instructions = () => {
                         <li className="myLI">
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 1</div>
                             <div className="titleDescription">
-                                Possession the unpleasing simplicity her uncommonly. Off say yet ample ten ought hence.Off say yet ample ten ought hence.
+                                Possession the unpleasing simplicity her uncommonly.Off say
+                                yet ample ten ought hence.Off say yet ample ten ought hence.
                             </div>
                         </li>
 
@@ -30,7 +31,10 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#FBCA3E" }}>Instruction 2</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 2</div>
                             <div className="titleDescription">
-                                Contest will contain 5-6 problems that need to be coded in Python, C++, or C.
+                                Off say yet ample ten ought hence. Depending in newspaper an
+                                september do existence strangers. Total great saw water had
+                                mirth happy new. Projecting pianoforte no of partiality is
+                                on. Nay besides joy society him totally six.
                             </div>
                         </li>
 
@@ -38,7 +42,7 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#E24A68" }}>Instruction 3</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 3</div>
                             <div className="titleDescription">
-                                Single Participant event.
+                                For the first correct submission of a question, you will receive the points currently available on that question.
                             </div>
                         </li>
 
@@ -46,7 +50,8 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 4</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 4</div>
                             <div className="titleDescription">
-                                For the first correct submission of a question, you will receive the points currently available on that question.
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                Impedit, cumque.
                             </div>
                         </li>
 
@@ -54,19 +59,21 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#4CADAD" }}>Instruction 5</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 5</div>
                             <div className="titleDescription">
-                                For each wrong submission before the correct submission, 10 points will be deducted. If the question was already solved before, no points will be deducted for that question.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Fuga minima consequuntur soluta placeat iure totam commodi repellendus ea delectus, libero fugit quod reprehenderit, sequi quo, et dolorum saepe nulla hic.
                             </div>
 
                         </li>
 
                         <li className="myLI">
                             {/* <div className="liTitle" style={{ "--accent-color": "#4CADAD" }}>Instruction 5</div> */}
-                            <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 5</div>
+                            <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 6</div>
                             <div className="titleDescription">
-                                For each wrong submission before the correct submission, 10 points will be deducted. If the question was already solved before, no points will be deducted for that question.
+                                Input should be given in the correct format.
                             </div>
 
                         </li>
+
 
                     </ul>
                 </p>

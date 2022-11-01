@@ -22,3 +22,35 @@
   *{
     /* background-color: #282c34; */
   }
+  
+.giveTableCss{
+  /* border: 1px solid #173264; */
+  /* background-color: #55608f; */
+  
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.giveTdCss{
+  background-color: transparent;
+  background-color: rgba(255,255,255,0.2);
+}
+
+
+
+.giveTbHeaderCss{
+  background-color: #55608f
+}
+
+.giveRowCss:hover{
+  background-color: rgba(255,255,255,0.3);
+}
+
+.giveRowCss:nth-child(even){
+  background-color: #2C3845;
+}
+
+.giveRowCss:nth-child(odd){
+  background-color: #454e5c;
+}
+
+
