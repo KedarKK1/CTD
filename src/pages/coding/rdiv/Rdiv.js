@@ -77,10 +77,11 @@ function Rdiv( props ) {
       // console.log("cookies", cookies.token)
       var formdata = new FormData();
 
-      const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
+      // const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
+      const myCodeArr =   localStorage.getItem(`${lang}`);
       var codeInput = " ";
       codeInput = calcInput(myCodeArr)
-      var fcode=myCodeArr.join("    ")
+      // var fcode=myCodeArr.join("    ")
       if(lang === "c"){
         // formdata.append("language", "c");
         // formdata.append("code", fcode)
@@ -88,27 +89,30 @@ function Rdiv( props ) {
 
         codeInput = +calcInput();
         formdata = {
-          code: myCodeArr.join(" "),
+          // code: myCodeArr.join(" "),
+          code: myCodeArr,
           language: lang,
         };
 
       }else if(lang === "python"){
-        // formdata.append("language", "python");
-        // formdata.append("code", fcode)
-        formdata = {
-          code: myCodeArr.join("    "),
-          language: lang,
-        };
+        formdata.append("language", "python");
+        formdata.append("code", myCodeArr)
+        // formdata = {
+        //   // code: myCodeArr.join("    "),
+        //   code: myCodeArr,
+        //   language: lang,
+        // };
 
         
 
       }else if(lang === "c_cpp"){
-        // formdata.append("language", "c++");
-        // formdata.append("code", fcode)
-        formdata = {
-          code: myCodeArr.join("    "),
-          language: "c++",
-        };
+        formdata.append("language", "c++");
+        formdata.append("code", myCodeArr)
+        // formdata = {
+        //   // code: myCodeArr.join("    "),
+        //   code: myCodeArr,
+        //   language: "c++",
+        // };
 
       }else{
         console.log("Please enter correct language")
@@ -122,32 +126,32 @@ function Rdiv( props ) {
         url: `http://localhost:8000/RC/submit/${props.qnIdParam}`,
         headers: { 
           'Authorization': `Token ${cookies.token}`,
-          'Content-Type': 'application/json' 
+          // 'Content-Type': `multipart/form-data;boundary=${formdata._boundary}` 
         },
-        withAuthentication:true,
-        body: JSON.stringify(formdata),
-        // body: formdata 
+        // withAuthentication:true,
+        // body: JSON.stringify(formdata),
+        data: formdata 
         
       };
       console.log('question.id - ',props.qnIdParam)
       console.log('formData - ',JSON.stringify(formdata))
       let result;
-      fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
-        .then(response => response.text())
-        .then(result2 => {result = result2; 
-        console.log(JSON.stringify(result2))
-      //   navigate(`/testcase/${props.qnIdParam}`, {state: {
-      //     "cases": [
-      //         "AC"
-      //     ],
-      //     "error": "na"
-      // }})
-      })
+      // fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
+      //   .then(response => response.text())
+      //   .then(result2 => {result = result2; 
+      //   console.log(JSON.stringify(result2))
+      // //   navigate(`/testcase/${props.qnIdParam}`, {state: {
+      // //     "cases": [
+      // //         "AC"
+      // //     ],
+      // //     "error": "na"
+      // // }})
+      // })
 
-      // axios(config)
-      //   .then(function (response) {
-      //     console.log(JSON.stringify(response.data));
-      //   })
+      axios(config)
+        .then(function (response) {
+          console.log('res data',JSON.stringify(response.data));
+        })
 
         .catch(error => console.log('error', error));
 
