@@ -22,8 +22,7 @@ const Instructions = () => {
                         <li className="myLI">
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 1</div>
                             <div className="titleDescription">
-                                Possession the unpleasing simplicity her uncommonly.Off say
-                                yet ample ten ought hence.Off say yet ample ten ought hence.
+                                Contest will contain 5-6 problems that need to be coded in Python, C++, or C.
                             </div>
                         </li>
 
@@ -31,10 +30,7 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#FBCA3E" }}>Instruction 2</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 2</div>
                             <div className="titleDescription">
-                                Off say yet ample ten ought hence. Depending in newspaper an
-                                september do existence strangers. Total great saw water had
-                                mirth happy new. Projecting pianoforte no of partiality is
-                                on. Nay besides joy society him totally six.
+                                Single Participant event.
                             </div>
                         </li>
 
@@ -42,8 +38,7 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#E24A68" }}>Instruction 3</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 3</div>
                             <div className="titleDescription">
-                                Immediate him her resolving his favourite. Wished denote
-                                abroad at branch at.
+                                For the first correct submission of a question, you will receive the points currently available on that question.
                             </div>
                         </li>
 
@@ -51,8 +46,7 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 4</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 4</div>
                             <div className="titleDescription">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Impedit, cumque.
+                                For each wrong submission before the correct submission, 10 points will be deducted. If the question was already solved before, no points will be deducted for that question.   
                             </div>
                         </li>
 
@@ -60,11 +54,29 @@ const Instructions = () => {
                             {/* <div className="liTitle" style={{ "--accent-color": "#4CADAD" }}>Instruction 5</div> */}
                             <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 5</div>
                             <div className="titleDescription">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Fuga minima consequuntur soluta placeat iure totam commodi repellendus ea delectus, libero fugit quod reprehenderit, sequi quo, et dolorum saepe nulla hic.
+                                Plagiarism checks would be done after the contest.
                             </div>
 
                         </li>
+
+                        <li className="myLI">
+                            {/* <div className="liTitle" style={{ "--accent-color": "#4CADAD" }}>Instruction 5</div> */}
+                            <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 5</div>
+                            <div className="titleDescription">
+                                Read the problem statement and try to figure out the pattern by providing input and matching the output. 
+                            </div>
+
+                        </li>
+
+                        <li className="myLI">
+                            {/* <div className="liTitle" style={{ "--accent-color": "#4CADAD" }}>Instruction 5</div> */}
+                            <div className="liTitle" style={{ "--accent-color": "#1B5F8C" }}>Instruction 6</div>
+                            <div className="titleDescription">
+                                Input should be given in the correct format.
+                            </div>
+
+                        </li>
+
 
                     </ul>
                 </p>

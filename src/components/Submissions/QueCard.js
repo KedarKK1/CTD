@@ -27,7 +27,7 @@ const QueCard = ({qno}) => {
                                         <td className="sprogress">
                                             <p className="title-text ">Progress</p>
                                         </td>
-                                        <td className="sview"></td>
+                                        <td className="sview">View</td>
                                         
                                         
                                     </tr>

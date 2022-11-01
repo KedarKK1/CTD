@@ -40,12 +40,14 @@ const LeaderBoard_page = () => {
           };
           
         const questionsList = await axios(config).then(res => {
-          // console.log('res.data',res.data) 
-          setQuestions([...questions, res.data]);
+          // console.log('res.data',res.data.results) 
+          const datas = [...res.data.results]
+          setQuestions(data =>[...datas]);
+          console.log('datas',datas)
           console.log('questions',questions)
 
-        }).catch(function (error) {
-              console.log(error);
+        }).catch(function (err) {
+              console.log('err',err);
             });
             //   .then(function (response) {
             //     console.log(JSON.stringify(response.data));

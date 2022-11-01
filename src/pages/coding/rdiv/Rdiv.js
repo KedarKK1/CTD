@@ -15,6 +15,7 @@ import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/ext-language_tools";
 import { useNavigate } from "react-router-dom";
 var axios = require('axios');
+var FormData = require('form-data');
 
 function Rdiv( props ) {
   let [lang, updatelang] = useState("c_cpp");
@@ -74,66 +75,82 @@ function Rdiv( props ) {
       setLoading(true);
 
       // console.log("cookies", cookies.token)
-      var formdata = {};
+      var formdata = new FormData();
 
       const myCodeArr =   localStorage.getItem(`${lang}`).split("\n");
       var codeInput = " ";
       codeInput = calcInput(myCodeArr)
+      var fcode=myCodeArr.join("    ")
       if(lang === "c"){
         // formdata.append("language", "c");
-        // formdata.append("code", localStorage.getItem("c"))
+        // formdata.append("code", fcode)
 
 
-        // codeInput = +calcInput();
+        codeInput = +calcInput();
         formdata = {
+          code: myCodeArr.join(" "),
           language: lang,
-          code: myCodeArr.join(" ")
         };
 
       }else if(lang === "python"){
         // formdata.append("language", "python");
-        // formdata.append("code", localStorage.getItem("python"))
+        // formdata.append("code", fcode)
         formdata = {
+          code: myCodeArr.join("    "),
           language: lang,
-          code: myCodeArr.join(" ")
         };
 
+        
+
       }else if(lang === "c_cpp"){
-        // formdata.append("language", "cpp");
-        // formdata.append("code", localStorage.getItem("cpp"))
+        // formdata.append("language", "c++");
+        // formdata.append("code", fcode)
         formdata = {
+          code: myCodeArr.join("    "),
           language: "c++",
-          code: myCodeArr.join(" ")
         };
 
       }else{
         console.log("Please enter correct language")
       }
       // formdata.append("code", `${userInpText}`)
-
+      
+      // formdata=window.FormData
+      // myHeader = formdata.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' };
       var config = {
         method: 'POST',
         url: `http://localhost:8000/RC/submit/${props.qnIdParam}`,
         headers: { 
           'Authorization': `Token ${cookies.token}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json' 
         },
+        withAuthentication:true,
         body: JSON.stringify(formdata),
+        // body: formdata 
+        
       };
       console.log('question.id - ',props.qnIdParam)
       console.log('formData - ',JSON.stringify(formdata))
       let result;
       fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
         .then(response => response.text())
-        .then(result2 => {console.log('result2',result2); result = result2; 
-        navigate(`/testcase/${props.qnIdParam}`, {state: {
-          "cases": [
-              "AC"
-          ],
-          "error": "na"
-      }})
+        .then(result2 => {result = result2; 
+        console.log(JSON.stringify(result2))
+      //   navigate(`/testcase/${props.qnIdParam}`, {state: {
+      //     "cases": [
+      //         "AC"
+      //     ],
+      //     "error": "na"
+      // }})
       })
+
+      // axios(config)
+      //   .then(function (response) {
+      //     console.log(JSON.stringify(response.data));
+      //   })
+
         .catch(error => console.log('error', error));
+
       setLoading(false);
       //! look at below navigation if ./sub or /sub or sub only
     } catch (err) {
@@ -142,9 +159,9 @@ function Rdiv( props ) {
   }
 
   useEffect(() => {
-    localStorage.setItem('c', `// Enter your solution here \n`)
+    localStorage.setItem('c', ` `)
     localStorage.setItem('c_cpp', `#include <iostream> \n using namespace std; \n int main(){ \n int t; cin>>t;  \n  cout<<"Hello"; \n return 0; \n}`)
-    localStorage.setItem('python', `# Enter your solution here \n`)
+    localStorage.setItem('python', ` `)
     const loadData = async () => {
         setLoading(true);
         console.log("cookies", cookies.token)
