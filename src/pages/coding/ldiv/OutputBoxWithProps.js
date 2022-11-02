@@ -42,7 +42,7 @@ function ClipboardCopy({ copyText }) {
 
         <div> */}
       {/* <input type="text" value={copyText} readOnly /> */}
-      <textarea value={copyText} rows="3" className="clipboardCopy position-relative" readOnly />
+      <textarea value={copyText} rows="3" className="clipboardCopy position-relative p-2" readOnly />
       <span class="position-absolute top-0 start-100 translate-middle badge bg-light text-dark">
         <span><button className="border-0" onClick={handleCopyClick}><span>{isCopied ? 'Copied!' : 'Copy'}</span></button></span>
         {/* <i class="fa-solid fa-copy"></i> */}
