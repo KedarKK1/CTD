@@ -153,7 +153,7 @@ function App() {
             </Route>
             {/* <Route path="/submission" element={<Submission_page />} /> */}
             <Route path="/submission/:id" element={<Submissions />} />
-            <Route path="/testcase/:id" element={<TestCases />} />
+            <Route path="/testcase" element={<TestCases />} />
             <Route path="/leaderboard/:id" element={<LeaderBoard_page />} />
             {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
           </Route>

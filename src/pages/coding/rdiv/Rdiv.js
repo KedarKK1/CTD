@@ -120,6 +120,7 @@ function Rdiv( props ) {
       
       // formdata=window.FormData
       // myHeader = formdata.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' };
+      console.log('formData - ', formdata );
       var config = {
         method: 'POST',
         url: `http://localhost:8000/RC/submit/${props.qnIdParam}`,
@@ -150,7 +151,7 @@ function Rdiv( props ) {
       axios(config)
         .then(function (response) {
           console.log('res data',JSON.stringify(response.data));
-          navigate(`/testcase/${props.qnIdParam}`, { replace: true, state: response.data })
+          navigate(`/testcase`, { state: response.data })
         })
 
         .catch(error => console.log('error', error));
