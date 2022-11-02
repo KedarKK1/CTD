@@ -19,15 +19,7 @@ const Submissions = () => {
     const [qdetails, setQdetails] = useState([]);
     const [qdetailLen, setQdetailLen] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [questions, setQuestions] = useState([{
-        code: "print(int(input()))",
-        id: 1,
-        language: "python",
-        p_id: 1,
-        q_id: 1,
-        status: "WA",
-        time: "2022-10-26T20:59:16.641836+05:30",
-    }]);
+    const [questions, setQuestions] = useState([]);
 
     const [cookies, setCookies] = useCookies(["token"]);
 
