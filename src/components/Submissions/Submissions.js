@@ -132,7 +132,8 @@ const Submissions = () => {
                     // attemptNo={que.id}
                     // attemptNo={idx+1 + 10*(params.id-1)}
                     attemptNo={idx+1}
-                    time={`${que.time.split("T")[0]} : ${que.time.split("T")[1].split(".")[0]}` }
+                    time={`${que.hours}: ${que.mins}`}
+                    // time={`${que.time && que.time.split("T")[0]} : ${que.time.split("T")[1].split(".")[0]}` }
                     progbar={<ProgressBar animated
                         // now={que.progress}
                         // now={70}
@@ -142,6 +143,7 @@ const Submissions = () => {
                     />}
                 </div>       
                 ))}
+                {!qdetails.length ? <div className="text-white">No Submissions</div> : <div></div>}
             </div>
 
                         

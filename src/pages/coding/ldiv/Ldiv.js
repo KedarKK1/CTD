@@ -123,6 +123,7 @@ function Ldiv( props ) {
                             </ul> */}
                             <br />
                             <b><h4><u>Output Constrains</u> - </h4></b>
+                            {question.output_format}
                             {/* For each test case, output the minimum number of extra chairs Chef must buy so that every student gets one chair. */}
                             {/* TODO */}
                             {/* <ul>{question.output_format}</ul>
@@ -130,14 +131,14 @@ function Ldiv( props ) {
                             <ul>{question.sample_input}</ul>
                             <b><h4><u>Output Format</u> - </h4></b>
                             <ul>{question.sample_output}</ul> */}
-                            <div className="row">
+                            {/* <div className="row">
                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                                     <InputBoxWithProps input={question.sample_input}  />
                                 </div>
                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                                     <OutputBoxWithProps output={question.sample_output} />
                                 </div>
-                            </div>
+                            </div> */}
                             
                         </Card.Text>
                     </Card.Body>
