@@ -70,10 +70,9 @@ export default function Ldiv( props ) {
             data : data
           };
 
-
-          axios(config)
+          await axios(config)
             .then(function (response) {
-            // console.log(JSON.stringify(response.data));
+            console.log('res backL ',JSON.stringify(response.data));
             setRunOutputVal(response.data.output);
             })
             .catch(function (error) {

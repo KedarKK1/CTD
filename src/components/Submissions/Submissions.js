@@ -100,7 +100,7 @@ const Submissions = () => {
                 <Col className="mt-1 h-100">
                     <Pagination >
                         {[...Array(6).keys()].map((x) => (
-                            <Pagination.Item  key={x + 1} active={params.id == x+1} onClick={() => { navigate(`/submission/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
+                            <Pagination.Item className="givePaginationTheme" key={x + 1} active={params.id == x+1} onClick={() => { navigate(`/submission/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
                         ))}
                     </Pagination>
                 </Col>
