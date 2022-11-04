@@ -1,6 +1,6 @@
 import { Col, Pagination, ProgressBar} from "react-bootstrap";
 import { useEffect, useState } from 'react';
-import { Table } from "react-bootstrap";
+// import { Table } from "react-bootstrap";
 import React from 'react';
 import "./Submissions.css";
 import QueCard from "./QueCard";
@@ -42,7 +42,7 @@ const Submissions = () => {
                   };
                   
                 try {
-                    const questionsList = await axios(config).then((res)=>{
+                    await axios(config).then((res)=>{
                         console.log('res.data.result',res.data.results)
                         setQuestions(res.data.results);
                         setQdetailLen(res.data.results.length)
@@ -74,7 +74,7 @@ const Submissions = () => {
                         //   .then(function (response) {
                         //     console.log(JSON.stringify(response.data));
                         //   })
-                    let result1=[]
+                    // let result1=[]
                     // result1=[...result1,...questionsList.data.results]
                     // console.log('result1  ',result1)
                     // setQuestions(...questions,result1);

@@ -3,20 +3,26 @@ import './TestCases.css'
 // import rightSymbol from './Images/rightSymbol.jpg'
 import wrongeSymbol2 from './Images/wrongeSymbol2.jfif'
 import rightSymbol2 from './Images/rightSymbol2.png'
-import { Card, Col, Image, Row } from 'react-bootstrap';
+import { Button, Card, Col, Image, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import { useLocation, useParams } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import axios from 'axios';
 
 const TestCases = () => {
-    const [cookies, setCookies] = useCookies(["token"]);
+    // const [cookies, setCookies] = useCookies(["token"]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const params = useParams();
     const {state} = useLocation();
  ;   const [questions, setQuestions] = useState({
         "cases": [],
         "error": ""
     });
+
+    const goBack = () => {
+        navigate(`/question_hub/${params.id}`);
+    }
 
     useEffect(() => {
         setLoading(true);
@@ -57,6 +63,7 @@ const TestCases = () => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
+                        <Button onClick={goBack} >Go Back</Button>
                     </Row>
                 </Col>
                 <Col xxl={8} lg={8} md={8} sm={12} xs={12} >

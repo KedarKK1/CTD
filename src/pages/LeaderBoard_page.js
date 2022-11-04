@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Table, Button, ProgressBar, Pagination, Col } from 'react-bootstrap';
+// import { Table, Button, ProgressBar, Pagination, Col } from 'react-bootstrap';
+import { Pagination, Col } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./LeaderBoard.css";
@@ -15,9 +16,9 @@ const LeaderBoard_page = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const now = 60;
-  const now2 = 10;
-  const now3 = 90;
+  // const now = 60;
+  // const now2 = 10;
+  // const now3 = 90;
 
   // let active = 2;
   // let items = [];
@@ -41,7 +42,7 @@ const LeaderBoard_page = () => {
             }
           };
           
-        const questionsList = await axios(config).then(res => {
+        await axios(config).then(res => {
           console.log('res.data.results ',res.data.results ) 
           console.log('res.data.count ',res.data.count ) 
           setQPerPage(res.data.count)
@@ -195,7 +196,8 @@ const LeaderBoard_page = () => {
                   <Col className="mt-1 h-100">
                       <Pagination >
                           {[...Array(10).keys()].map((x) => (
-                              <Pagination.Item className="givePaginationTheme"  key={x + 1} active={params.id == x+1} onClick={() => { if( params.id != x+1){navigate(`/leaderboard/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
+                              <Pagination.Item className="givePaginationTheme"  key={x + 1} active={parseInt(params.id) === x+1} onClick={() => { if( params.id != x+1){navigate(`/leaderboard/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
+                              // <Pagination.Item className="givePaginationTheme"  key={x + 1} active={params.id == x+1} onClick={() => { if( params.id != x+1){navigate(`/leaderboard/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
                           ))}
                       </Pagination>
                   </Col>

@@ -1,21 +1,21 @@
 // import React from 'React';
-import { Card, Col, Pagination, Row } from 'react-bootstrap';
+import { Card, Col, Pagination } from 'react-bootstrap';
 import './ldiv.css';
 // import AceEditor from "react-ace";
 import { useCookies } from "react-cookie";
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import InputBox from './InputBox';
-import OutputBox from './OutputBox';
-import LBottom from './LBottom';
-import InputBoxWithProps from './InputBoxWithProps';
+// import InputBox from './InputBox';
+// import OutputBox from './OutputBox';
+// import LBottom from './LBottom';
+// import InputBoxWithProps from './InputBoxWithProps';
 import OutputBoxWithProps from './OutputBoxWithProps';
 var axios = require('axios');
 
 export default function Ldiv( props ) {
     //    let [qdisp,updateq]=useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
     // let [qdisp] = useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
-    const [state, setState] = useState(props.qnIdParam);
+    // const [state, setState] = useState(props.qnIdParam);
     const [cookies, setCookies] = useCookies(["token"]);
     const [loading, setLoading] = useState(false);
     const [question, setQuestion] = useState([]);

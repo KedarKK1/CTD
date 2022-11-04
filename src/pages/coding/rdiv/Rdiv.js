@@ -20,14 +20,12 @@ var FormData = require('form-data');
 function Rdiv( props ) {
   let [lang, updatelang] = useState("c_cpp");
   let [theme, utheme] = useState("monokai");
-  let cscore = 100;
   let [cdc, ucdc] = useState("black");
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState([]);
   const [cookies, setCookies] = useCookies(["token"]);
   const [userInpText, setUserInpText] = useState("");
   const navigate = useNavigate();
-
   const fileu = async (e) => {
     // e.preventDefault();
     // const reader = new FileReader();
@@ -63,13 +61,13 @@ function Rdiv( props ) {
     console.log(e.target.value);
     // console.log(theme);
   }
-  const calcInput = async (dataArr) => {
-    var codeInput = " ";
-    for await (const str of dataArr){
-      codeInput += (" "+str+" ");
-    } 
-    return codeInput;
-  }
+  // const calcInput = async (dataArr) => {
+  //   var codeInput = " ";
+  //   for await (const str of dataArr){
+  //     codeInput += (" "+str+" ");
+  //   } 
+  //   return codeInput;
+  // }
   const submitInput = () =>{
     try {
       setLoading(true);
@@ -135,7 +133,7 @@ function Rdiv( props ) {
       };
       console.log('question.id - ',props.qnIdParam);
       console.log('formData - ', formdata );
-      let result;
+      // let result;
       // fetch(`http://localhost:8000/RC/submit/${props.qnIdParam}`, config)
       //   .then(response => response.text())
       //   .then(result2 => {result = result2; 
@@ -151,7 +149,7 @@ function Rdiv( props ) {
       axios(config)
         .then(function (response) {
           console.log('res data',JSON.stringify(response.data));
-          navigate(`/testcase`, { state: response.data })
+          navigate(`/testcase/${props.qnIdParam}`, { state: response.data })
         })
 
         .catch(error => console.log('error', error));
@@ -190,7 +188,7 @@ function Rdiv( props ) {
         setLoading(false);
     }
     loadData();
-}, [])
+}, [cookies.token])
 
 function onChange(newValue) {
   // console.log("change", newValue);
