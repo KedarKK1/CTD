@@ -26,24 +26,58 @@ function Rdiv( props ) {
   const [cookies, setCookies] = useCookies(["token"]);
   const [userInpText, setUserInpText] = useState("");
   const navigate = useNavigate();
-  const fileu = async (e) => {
+  const handleFile = (e) => {
+    const content = e.target.result;
+    console.log('file content',  content)
+    // ucode(content);
+    setUserInpText(content);
+    localStorage.setItem(`${lang}`,content);
+    // You can set content in state and show it in render.
+  }
+  const handleChangeFile   = (e) => {
     // e.preventDefault();
     // const reader = new FileReader();
     // reader.onload = async (e) => {
     //   const text = e.target.result;
-    //   console.log(text);
+      // console.log('e.target.result: ',e.target.result);
+      console.log('e: ',e);
     //   alert(text);
     // };
-    var file = e;
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      // The file's text will be printed here
-      console.log(event.target.result)
-    };
-  
-    reader.readAsText(file);
-  
+    let reader = new FileReader();
+    // reader.onloadend = function(e) {
+    //   // The file's text will be printed here
+    //   console.log("file content changed to= ", e.target.result)
+      
+    //   localStorage.setItem(`${lang}`, e.target.result)
+    // };
+    reader.onloadend = handleFile;
+    reader.readAsText(e); 
   };
+
+  function loadbuffer(){
+    console.log("hi loadbuffer called");
+    var config = {
+      method: 'get',
+      url: `http://127.0.0.1:8000/RC/buffer/${props.qnIdParam}`,
+      headers: {
+        'Authorization': `Token ${cookies.token}`
+      }
+    };
+
+    axios(config)
+    .then(function (response) {
+      // console.log(JSON.stringify(response.data));
+      console.log(response.data);
+      if(JSON.stringify(response.data)==='Failed')return;
+      updatelang(response.data.language);
+      if(response.data.language=="c++" || response.data.language=="c")updatelang("c_cpp");
+      else updatelang(response.data.language);
+
+      setUserInpText(response.data.code);
+      localStorage.setItem(`${lang}`,response.data.code);
+    })
+  }
+
   function langc(e) {
     // console.log(lang);/
     updatelang(e.target.value);
@@ -255,14 +289,15 @@ if (loading) {
           <button className="rbn rbn1 bg-t  b-1 c-w br-2 pd-lr-15"><span><i class="fa-solid fa-play"></i> </span>Run</button>
         </div> */}
         <div >
-          <button className="rbn rbn2 bg-t  b-1 c-w br-2 pd-lr-15">Load Buffer</button>
+          <button className="rbn rbn2 bg-t  b-1 c-w br-2 pd-lr-15"  onClick={loadbuffer}>Load Buffer</button>
         </div>
         <div >
           <label htmlFor="inpfff" className="rbn rbn3 bg-t  b-1 c-w br-2 pd-lr-15">
             {/* Choose File */}
             <span><i class="fa-solid fa-file-arrow-up"></i> </span> Choose File
           </label>  
-          <input type="file" accept=".txt,.cpp,.c,.py" name="inpf" id="inpfff" onChange={(e)=> {fileu(e.target.files[0])}} />
+          {/* <input type="file" accept=".txt,.cpp,.c,.py" name="inpf" id="inpfff" onChange={(e)=> {handleChangeFile(e.target.files[0])}} /> */}
+          <input type="file" name="inpf" id="inpfff" onChange={ e=> handleChangeFile(e.target.files[0])} />
         </div>
          <div >
           <input onClick={submitInput} type="submit" value="Submit" className="rbn rbn4 b-b pd-lr-15 bg-t  b-1 c-w br-2" />
