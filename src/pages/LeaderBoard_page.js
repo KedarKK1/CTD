@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Table, Button, ProgressBar, Pagination, Col } from 'react-bootstrap';
+// import { Table, Button, ProgressBar, Pagination, Col } from 'react-bootstrap';
+import { Pagination, Col } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./LeaderBoard.css";
@@ -9,13 +10,15 @@ const LeaderBoard_page = () => {
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [qdetailLen, setQdetailLen] = useState(0);
+  const [qPerPage, setQPerPage] = useState(0);
 
   const params = useParams();
   const navigate = useNavigate();
 
-  const now = 60;
-  const now2 = 10;
-  const now3 = 90;
+  // const now = 60;
+  // const now2 = 10;
+  // const now3 = 90;
 
   // let active = 2;
   // let items = [];
@@ -33,18 +36,22 @@ const LeaderBoard_page = () => {
         // console.log("cookies", cookies.token)
         var config = {
             method: 'get',
-            url: 'http://localhost:8000/RC/allranks',
+            url: `http://localhost:8000/RC/allranks?page=${params.id}`,
             headers: { 
               'Authorization': `Token ${cookies.token}`
             }
           };
           
-        const questionsList = await axios(config).then(res => {
-          console.log('res.data',res.data.results) 
-          const datas = [...res.data.results]
-          setQuestions(data =>[...datas]);
-          console.log('datas',datas)
-          console.log('questions',questions)
+        await axios(config).then(res => {
+          console.log('res.data.results ',res.data.results ) 
+          console.log('res.data.count ',res.data.count ) 
+          setQPerPage(res.data.count)
+          // const datas = [...res.data.results]
+          setQdetailLen(res.data.results.length);
+          // setQuestions(data =>[...datas]);
+          setQuestions(questions => [...questions,...res.data.results]) 
+          // console.log('datas',datas) 
+          console.log(' questions ', questions ) 
 
         }).catch(function (err) {
               console.log('err',err);
@@ -86,7 +93,7 @@ const LeaderBoard_page = () => {
               <td className="giveTdCss">Q6</td>
               <td className="giveTdCss"></td>
             </tr>
-            <tr className="giveRowCss">
+            {/* <tr className="giveRowCss">
               <td className="giveTdCss">Ankit Joshti</td>
               <td className="giveTdCss">Sukanya Awards</td>
               <td className="giveTdCss">-55</td>
@@ -107,7 +114,7 @@ const LeaderBoard_page = () => {
               <td className="giveTdCss">57</td>
               <td className="giveTdCss">45</td>
               <td className="giveTdCss">80</td>
-            </tr>
+            </tr> */}
           </thead>
           <tbody>
             
@@ -126,12 +133,12 @@ const LeaderBoard_page = () => {
             })} */}
 
 
-            {questions[0] && questions.length > 0 && 
+            {/* {questions[0] && questions.length > 0 && 
                 (Object.entries(questions[0]).map((user2, idx2)=>{
                   return(
                     <tr className="giveRowCss" key={idx2+1 + 10*(params.id-1)}>
                       <td className="giveTdCss">{idx2+1 + 10*(params.id-1)}</td>
-                      <td className="giveTdCss">{user2[0] || 'UNKNOWN'}</td>
+                      <td className="giveTdCss">{user2.name || 'UNKNOWN'}</td>
                       <td className="giveTdCss">{user2[1][1] || '0'}</td>
                       <td className="giveTdCss">{user2[1][2] || '0'}</td>
                       <td className="giveTdCss">{user2[1][3] || '0'}</td>
@@ -143,23 +150,27 @@ const LeaderBoard_page = () => {
                     )
                   })
                 )
-            }
+            } */}
 
-            {/* {questions && questions.length > 0 && questions.map((user, idx)=>{
-              return (              
-              <tr>
-                <td>{idx}</td>
-                <td>{user[0]}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+            {questions && questions.length > 0 && questions.map((user, idx)=>{
+              return (   
+                <tr className="giveRowCss" key={idx+1 + (params.id-1)}>
+                  {qdetailLen > 0 && (idx+1)<=qdetailLen && 
+                    <>
+                    <td className="giveTdCss">{idx+1 + qPerPage*(params.id-1)}</td>
+                    <td className="giveTdCss">{user.name || 'UNKNOWN'}</td>
+                    <td className="giveTdCss">{user[1] || '0'}</td>
+                    <td className="giveTdCss">{user[2] || '0'}</td>
+                    <td className="giveTdCss">{user[3] || '0'}</td>
+                    <td className="giveTdCss">{user[4] || '0'}</td>
+                    <td className="giveTdCss">{user[5] || '0'}</td>
+                    <td className="giveTdCss">{user[6] || '0'}</td>
+                    <td className="giveTdCss">{user.total_score || '0'}</td>
+                    </>
+                  }
+                </tr>            
               )
-            })} */}
+            })}
 
           </tbody>
         </table>
@@ -185,7 +196,8 @@ const LeaderBoard_page = () => {
                   <Col className="mt-1 h-100">
                       <Pagination >
                           {[...Array(10).keys()].map((x) => (
-                              <Pagination.Item className="givePaginationTheme"  key={x + 1} active={params.id == x+1} onClick={() => { if( params.id != x+1){navigate(`/leaderboard/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
+                              <Pagination.Item className="givePaginationTheme"  key={x + 1} active={parseInt(params.id) === x+1} onClick={() => { if( params.id != x+1){navigate(`/leaderboard/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
+                              // <Pagination.Item className="givePaginationTheme"  key={x + 1} active={params.id == x+1} onClick={() => { if( params.id != x+1){navigate(`/leaderboard/${x+1}`); window.location.reload();} }} >{x + 1}</Pagination.Item>
                           ))}
                       </Pagination>
                   </Col>

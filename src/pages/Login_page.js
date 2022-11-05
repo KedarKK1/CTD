@@ -3,6 +3,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import { useCookies } from "react-cookie";
+import axios from 'axios';
 
 const Login_page = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Login_page = () => {
         // console.log("name",e.target.name,"e.target.value",e.target.value)
     }
 
-    const validate = () => {
+    const validate = async () => {
         setLoading(true);
         if (formValue.username === "") {
             setAlertMessage({
@@ -55,46 +56,76 @@ const Login_page = () => {
             //     "password": "admins"
             //   });
 
-            var raw = JSON.stringify(formValue);
-            var requestOptions = {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: raw,
-            redirect: 'follow'
+            var loginTimeConfig = {
+                method: 'get',
+                url: `http://127.0.0.1:8000/RC/time`,
+                // no header needed
             };
-              
-            fetch("http://localhost:8000/auth/token/login", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                var tokenObject = JSON.parse(result);
-                var token = tokenObject.auth_token;
-                if(token){
-                    setCookie("token", token, { path: "/", maxAge: 4320 }); // 3 days
-                    if(cookies){
-                        console.log(" ")
-                    }
-                    navigate("/instruction")
+
+            await axios(loginTimeConfig).then((res)=>{
+                // var now2 = new Date();
+                // console.log("before login - time.data.start_time", res.data.start_time);
+                // console.log("before login - time.data.now", Date.now());
+                // var isoDate = new Date(now2).toISOString()
+                // console.log("before login - new Date(now2).toISOString()", isoDate);
+                if((Date.now() - Date.parse(res.data.start_time))>0){
+                    console.log("user can login as starttime has arrived", (Date.parse(res.data.start_time) - Date.now())/1000)
+                    var raw = JSON.stringify(formValue);
+                    var requestOptions = {
+                    method: 'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: raw,
+                    redirect: 'follow'
+                    };
+                      
+                    fetch("http://localhost:8000/auth/token/login", requestOptions)
+                    .then(response => response.text())
+                    .then(result => {
+                        var tokenObject = JSON.parse(result);
+                        var token = tokenObject.auth_token;
+                        if(token){
+                            setCookie("token", token, { path: "/", maxAge: 4320 }); // 3 days
+                            if(cookies){
+                                console.log(" ")
+                            }
+                            navigate("/instruction")
+                        }else{
+                            setAlertMessage({
+                                ...alertMessage,
+                                message: "Incorrect Username or Password!",
+                                icon: "fa fa-exclamation-triangle",
+                                wholeAlert: "alert d-block alert-danger"
+                            })
+                        }
+                        // console.log('formValue',formValue)
+        
+                    })
+                    .catch(error => {
+                        // console.log('formValue',formValue)
+                        setAlertMessage({
+                            ...alertMessage,
+                            message: "Incorrect Username or Password!",
+                            icon: "fa fa-exclamation-triangle",
+                            wholeAlert: "alert d-block alert-danger"
+                        })
+                        console.log('error', error)
+                    });
+
+
+
                 }else{
                     setAlertMessage({
                         ...alertMessage,
-                        message: "Incorrect Username or Password!",
+                        message: "Event Has Not Started Yet!",
                         icon: "fa fa-exclamation-triangle",
                         wholeAlert: "alert d-block alert-danger"
                     })
                 }
-                // console.log('formValue',formValue)
+            }).catch((err)=>{
+                console.log("err in login timer: ", err)
+            });
 
-            })
-            .catch(error => {
-                // console.log('formValue',formValue)
-                setAlertMessage({
-                    ...alertMessage,
-                    message: "Incorrect Username or Password!",
-                    icon: "fa fa-exclamation-triangle",
-                    wholeAlert: "alert d-block alert-danger"
-                })
-                console.log('error', error)
-            });}
+    }
         setLoading(false);
     }
 

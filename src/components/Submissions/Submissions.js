@@ -1,6 +1,6 @@
 import { Col, Pagination, ProgressBar} from "react-bootstrap";
 import { useEffect, useState } from 'react';
-import { Table } from "react-bootstrap";
+// import { Table } from "react-bootstrap";
 import React from 'react';
 import "./Submissions.css";
 import QueCard from "./QueCard";
@@ -19,15 +19,7 @@ const Submissions = () => {
     const [qdetails, setQdetails] = useState([]);
     const [qdetailLen, setQdetailLen] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [questions, setQuestions] = useState([{
-        code: "print(int(input()))",
-        id: 1,
-        language: "python",
-        p_id: 1,
-        q_id: 1,
-        status: "WA",
-        time: "2022-10-26T20:59:16.641836+05:30",
-    }]);
+    const [questions, setQuestions] = useState([]);
 
     const [cookies, setCookies] = useCookies(["token"]);
 
@@ -50,7 +42,7 @@ const Submissions = () => {
                   };
                   
                 try {
-                    const questionsList = await axios(config).then((res)=>{
+                    await axios(config).then((res)=>{
                         console.log('res.data.result',res.data.results)
                         setQuestions(res.data.results);
                         setQdetailLen(res.data.results.length)
@@ -82,7 +74,7 @@ const Submissions = () => {
                         //   .then(function (response) {
                         //     console.log(JSON.stringify(response.data));
                         //   })
-                    let result1=[]
+                    // let result1=[]
                     // result1=[...result1,...questionsList.data.results]
                     // console.log('result1  ',result1)
                     // setQuestions(...questions,result1);
@@ -108,7 +100,7 @@ const Submissions = () => {
                 <Col className="mt-1 h-100">
                     <Pagination >
                         {[...Array(6).keys()].map((x) => (
-                            <Pagination.Item  key={x + 1} active={params.id == x+1} onClick={() => { navigate(`/submission/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
+                            <Pagination.Item className="givePaginationTheme" key={x + 1} active={params.id == x+1} onClick={() => { navigate(`/submission/${x+1}`); window.location.reload(); }} >{x + 1}</Pagination.Item>
                         ))}
                     </Pagination>
                 </Col>
@@ -132,7 +124,8 @@ const Submissions = () => {
                     // attemptNo={que.id}
                     // attemptNo={idx+1 + 10*(params.id-1)}
                     attemptNo={idx+1}
-                    time={`${que.time.split("T")[0]} : ${que.time.split("T")[1].split(".")[0]}` }
+                    time={`${que.hours}: ${que.mins}`}
+                    // time={`${que.time && que.time.split("T")[0]} : ${que.time.split("T")[1].split(".")[0]}` }
                     progbar={<ProgressBar animated
                         // now={que.progress}
                         // now={70}
@@ -142,6 +135,7 @@ const Submissions = () => {
                     />}
                 </div>       
                 ))}
+                {!qdetails.length ? <div className="text-white">No Submissions</div> : <div></div>}
             </div>
 
                         

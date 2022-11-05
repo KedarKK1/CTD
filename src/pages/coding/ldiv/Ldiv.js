@@ -1,24 +1,26 @@
 // import React from 'React';
-import { Card, Col, Pagination, Row } from 'react-bootstrap';
+import { Card, Col, Pagination } from 'react-bootstrap';
 import './ldiv.css';
 // import AceEditor from "react-ace";
 import { useCookies } from "react-cookie";
 import React, { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import InputBox from './InputBox';
-import OutputBox from './OutputBox';
-import LBottom from './LBottom';
-import InputBoxWithProps from './InputBoxWithProps';
+import { useNavigate } from 'react-router-dom';
+// import InputBox from './InputBox';
+// import OutputBox from './OutputBox';
+// import LBottom from './LBottom';
+// import InputBoxWithProps from './InputBoxWithProps';
 import OutputBoxWithProps from './OutputBoxWithProps';
 var axios = require('axios');
 
-function Ldiv( props ) {
+export default function Ldiv( props ) {
     //    let [qdisp,updateq]=useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
     // let [qdisp] = useState("hello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehehello \n \t\thehe");
-    const [state, setState] = useState(props.qnIdParam);
+    // const [state, setState] = useState(props.qnIdParam);
     const [cookies, setCookies] = useCookies(["token"]);
     const [loading, setLoading] = useState(false);
-    const [question, setQuestion] = useState([])
+    const [question, setQuestion] = useState([]);
+    const [textAreaVal, setTextAreaVal] = useState('')
+    const [runOutputVal, setRunOutputVal] = useState();
     const navigate = useNavigate();
     useEffect(() => {
         const loadData = async () => {
@@ -46,13 +48,36 @@ function Ldiv( props ) {
             //     console.log(JSON.stringify(response.data));
             //   })
             setQuestion(questionsList.data);
+            setTextAreaVal(questionsList.data.input_format);
+            setRunOutputVal(questionsList.data.output_format)
             setLoading(false);
         }
         loadData();
     }, [])
 
     const findOutput = async () => {
+        var FormData = require('form-data');
+        var data = new FormData();
+        data.append('input', textAreaVal);
+        console.log("textAreaVal ", textAreaVal);
+        var config = {
+            method: 'post',
+            url: `http://localhost:8000/RC/rc/${props.qnIdParam}`,
+            headers: {
+                'Authorization': `Token ${cookies.token}`,
+                'Content-type':"application/json"
+            },
+            data : data
+          };
 
+          await axios(config)
+            .then(function (response) {
+            console.log('res backL ',JSON.stringify(response.data));
+            setRunOutputVal(response.data.output);
+            })
+            .catch(function (error) {
+                console.log('err in run btn',error)
+            })
     }
 
     if (loading) {
@@ -123,6 +148,7 @@ function Ldiv( props ) {
                             </ul> */}
                             <br />
                             <b><h4><u>Output Constrains</u> - </h4></b>
+                            {question.output_format}
                             {/* For each test case, output the minimum number of extra chairs Chef must buy so that every student gets one chair. */}
                             {/* TODO */}
                             {/* <ul>{question.output_format}</ul>
@@ -130,14 +156,14 @@ function Ldiv( props ) {
                             <ul>{question.sample_input}</ul>
                             <b><h4><u>Output Format</u> - </h4></b>
                             <ul>{question.sample_output}</ul> */}
-                            <div className="row">
+                            {/* <div className="row">
                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                                     <InputBoxWithProps input={question.sample_input}  />
                                 </div>
                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                                     <OutputBoxWithProps output={question.sample_output} />
                                 </div>
-                            </div>
+                            </div> */}
                             
                         </Card.Text>
                     </Card.Body>
@@ -175,7 +201,22 @@ function Ldiv( props ) {
                 <textarea name="" id="" className='inpt bg-t c-w br-2'></textarea>
             </Card> */}
             <Card className="col-12 col-sm-9 col-sx-4 col-md-4 col-lg-4 bg-t b-2 border-0">
-                <InputBox />
+                <div className="inputBox">
+                    <Card className="inputBoxTitle">
+                        <Card.Body>
+                        <Card.Title >Sample Input</Card.Title>
+                            {/* <ClipboardCopy copyText={question.output_format} /> */}
+                            <div>
+                            {/* <input type="text" value={copyText} readOnly /> */}
+                                <textarea onChange={(e)=>{setTextAreaVal(e.target.value)}} value={textAreaVal} placeholder={question.output_format} rows="3" className="clipboardCopy position-relative p-2" />
+                                {/* <span class="position-absolute top-0 start-100 translate-middle badge bg-light text-dark px-2 py-2">
+                                <span><button className="border-0" onClick={handleCopyClick}><span>{isCopied ? 'Copied!' : 'Copy'}</span></button></span> 
+                                 <i class="fa-solid fa-copy"></i> 
+                                </span>*/}
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </div>
             </Card>
             <Card className="col-2 col-sm-2 col-sx-2 col-md-2 col-lg-2 bg-t b-2 border-0">
               <button className="rbnRun bg-t  b-1 c-w br-2 pd-lr-15" onClick={findOutput}><span><i class="fa-solid fa-play"></i> </span>Run</button>
@@ -183,7 +224,7 @@ function Ldiv( props ) {
             <Card className='col-12 col-sm-12 col-sx-4 col-md-4 col-lg-4 bg-t b-2 border-0'>
                 {/* <div className='bg-b c-w'><h5>Custom Output</h5></div>
                 <textarea name="" id="" className='outt bg-t c-w br-2' readOnly>{question.sample_output}</textarea> */}
-                <OutputBox />
+                <OutputBoxWithProps output={runOutputVal} />
             {/* </div> */}
         </Card>
                 </Card.Text>
@@ -196,4 +237,3 @@ function Ldiv( props ) {
     )
 }
 
-export default Ldiv;

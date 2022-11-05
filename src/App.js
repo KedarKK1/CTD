@@ -18,17 +18,18 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom"
 import './App.css';
 import RequireAuth from './components/RequireAuth';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import TestCases from './components/Test Cases/TestCases';
-var axios = require('axios');
+import Timer from './components/timer';
+// var axios = require('axios');
 
 function App() {
   // const [cookies, setCookie] = useCookies();
-  const [timer, setTimer] = useState({
-    "hours": 2,
-    "minutes": 0,
-    "seconds": 0
-  })
+  // const [timer, setTimer] = useState({
+  //   "hours": 2,
+  //   "minutes": 0,
+  //   "seconds": 0
+  // })
   const navigate = useNavigate();
   const [cookies, setCookies, removeCookies] = useCookies(["token"]);
 
@@ -56,28 +57,28 @@ function App() {
 
   // return route.path
 
-  useEffect(() => {
-    // console.log(location.pathname)
-    var config = {
-      method: 'get',
-      url: 'http://localhost:8000/RC/time',
-      headers: {}
-    };
+  // useEffect(() => {
+  //   // console.log(location.pathname)
+  //   var config = {
+  //     method: 'get',
+  //     url: 'http://localhost:8000/RC/time',
+  //     headers: {}
+  //   };
 
-    axios(config)
-      .then(function (response) {
-        console.log('timer', JSON.stringify(response.data));
-        setTimer({
-          "hours": response.data.hours,
-          "minutes": response.data.minutes,
-          "seconds": response.data.seconds
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  //   axios(config)
+  //     .then(function (response) {
+  //       console.log('timer', JSON.stringify(response.data));
+  //       setTimer({
+  //         "hours": response.data.hours,
+  //         "minutes": response.data.minutes,
+  //         "seconds": response.data.seconds
+  //       })
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
 
-  }, [location])
+  // }, [location])
 
 
   return (
@@ -85,7 +86,10 @@ function App() {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ maxHeight: '60px' }}>
         <div className="container-xxl" style={{ maxHeight: '50px' }}>
           <Navbar.Brand href="./question_hub"> <Image src={pisbLogo} alt="PISB_LOGO" style={{ maxHeight: '40px' }} className="pisbLogo" /> </Navbar.Brand>
-          {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> TIMER: {timer.hours}:{timer.minutes}:{timer.seconds} </Navbar.Brand> : <></>}
+          {/* {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> TIMER: {timer.hours}:{timer.minutes}:{timer.seconds} </Navbar.Brand> : <></>} */}
+          {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> TIMER:  </Navbar.Brand> : <></>}
+          {/* {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> <Timer /> </Navbar.Brand> : <></>} */}
+          {(location.pathname == "/" && location.pathname == "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> <Timer /> </Navbar.Brand> : <></>}
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

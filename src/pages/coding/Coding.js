@@ -7,14 +7,15 @@ import './Coding.css';
 // import { React } from "react";
 import Ldiv from './ldiv/Ldiv';
 import Rdiv from './rdiv/Rdiv';
-import { useCookies } from "react-cookie";
-import React, { useState, useEffect } from 'react'
+// import { useCookies } from "react-cookie";
+import React from 'react'
+// import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-var axios = require('axios');
+// var axios = require('axios');
 
 function Coding(){
-    const [cookies] = useCookies(["token"]);
-    const [loading, setLoading] = useState(false);
+    // const [cookies] = useCookies(["token"]);
+    // const [loading, setLoading] = useState(false);
 
     const params = useParams();
     // console.log('id: ', params.id)
