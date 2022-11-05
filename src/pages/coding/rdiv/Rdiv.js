@@ -1,6 +1,7 @@
 // import { Button } from 'bootstrap';
 import { useCookies } from "react-cookie";
-import { useState, FileReader, React, useEffect } from "react";
+import { useState, React, useEffect } from "react";
+// import { useState, FileReader, React, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import "./rdiv.css";
 // import Code_Editor from '../code_editor/Code_Editor';
@@ -23,7 +24,7 @@ function Rdiv( props ) {
   let [cdc, ucdc] = useState("black");
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState([]);
-  const [cookies, setCookies] = useCookies(["token"]);
+  const [cookies] = useCookies(["token"]);
   const [userInpText, setUserInpText] = useState("");
   const navigate = useNavigate();
   const handleFile = (e) => {
