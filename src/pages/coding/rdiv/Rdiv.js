@@ -70,7 +70,7 @@ function Rdiv( props ) {
       console.log(response.data);
       if(JSON.stringify(response.data)==='Failed')return;
       updatelang(response.data.language);
-      if(response.data.language=="c++" || response.data.language=="c")updatelang("c_cpp");
+      if(response.data.language==="c++" || response.data.language==="c")updatelang("c_cpp");
       else updatelang(response.data.language);
 
       setUserInpText(response.data.code);

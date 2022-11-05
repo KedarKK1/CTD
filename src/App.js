@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Container, Image } from 'react-bootstrap';
 import ResultPage from './pages/ResultPage';
 // import Submission_page from './pages/Submission_page';
-import LeaderBoard_page from './pages/LeaderBoard_page';
+// import LeaderBoard_page from './pages/LeaderBoard_page';
 import QuestionHubPage from './pages/QuestionHubPage';
 import Coding from './pages/coding/Coding';
 import Loginpage from './pages/Login_page';
@@ -21,6 +21,7 @@ import RequireAuth from './components/RequireAuth';
 // import { useEffect, useState } from 'react';
 import TestCases from './components/Test Cases/TestCases';
 import Timer from './components/timer';
+import Leaderboard_page from './pages/LeaderBoard_page';
 // var axios = require('axios');
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
   const [cookies, setCookies, removeCookies] = useCookies(["token"]);
 
   // setTimeout(() =>
-  
+
   // )
 
   const handleLogOut = () => {
@@ -89,7 +90,7 @@ function App() {
           {/* {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> TIMER: {timer.hours}:{timer.minutes}:{timer.seconds} </Navbar.Brand> : <></>} */}
           {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> TIMER:  </Navbar.Brand> : <></>}
           {/* {(location.pathname !== "/" && location.pathname !== "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> <Timer /> </Navbar.Brand> : <></>} */}
-          {(location.pathname == "/" && location.pathname == "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> <Timer /> </Navbar.Brand> : <></>}
+          {(location.pathname === "/" && location.pathname === "/result" && location.pathname !== "/instruction") ? <Navbar.Brand href="./question_hub" className="navTimer"> <Timer /> </Navbar.Brand> : <></>}
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -158,7 +159,7 @@ function App() {
             {/* <Route path="/submission" element={<Submission_page />} /> */}
             <Route path="/submission/:id" element={<Submissions />} />
             <Route path="/testcase/:id" element={<TestCases />} />
-            <Route path="/leaderboard/:id" element={<LeaderBoard_page />} />
+            <Route path="/leaderboard/:id" element={<Leaderboard_page />} />
             {/* <Route path="/leaderboard" element={<Leaderboard />} /> */}
           </Route>
         </Routes>

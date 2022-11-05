@@ -59,7 +59,7 @@ const TestCases = () => {
                                     {/* Some quick example text to build on the card title and make up the
                                     bulk of the card's content.
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. */}
-                                    {(questions.error != "") ? questions.error : "Compiled Successfully"}
+                                    {(questions.error !== "") ? questions.error : "Compiled Successfully"}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -80,7 +80,7 @@ const TestCases = () => {
                                             <Card.Header style={{ borderBottom: '1px solid white' }} ><h5>Test case {idx+1}</h5></Card.Header>
                                             <Card.Body>
                                                 <Card.Text>
-                                                    <span> <Image src={(res == "Passed") ? rightSymbol2 : wrongeSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> {(res == "Passed") ? "Passed" : res } </span>
+                                                    <span> <Image src={(res === "Passed") ? rightSymbol2 : wrongeSymbol2} style={{ maxWidth: '30px' }} rounded="true" bg="none" /> {(res === "Passed") ? "Passed" : res } </span>
                                                 </Card.Text>
                                             </Card.Body>
                                         </Card>

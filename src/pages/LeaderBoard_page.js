@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./LeaderBoard.css";
 
-const LeaderBoard_page = () => {
+const Leaderboard_page = () => {
   const [cookies] = useCookies(["token"]);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -208,4 +208,4 @@ const LeaderBoard_page = () => {
   );
 }
 
-export default LeaderBoard_page
+export default Leaderboard_page
