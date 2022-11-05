@@ -108,7 +108,7 @@ button[disabled=disabled], button:disabled{
 }
 
 .myUL .myLI .liTitle{
-    --liTitleH : 3rem;
+    /* --liTitleH : 3rem; */
     height: var(--liTitleH);
     margin-inline: calc(var(--inlineP)*-1); 
     background-color: var(--accent-color);
@@ -118,7 +118,8 @@ button[disabled=disabled], button:disabled{
     display: grid;
     place-content: center;
     position: relative;
-    border-radius: calc( var(--liTitleH)/2 0 0 calc(--liTitleH)/2 )
+    /* border-radius: calc( var(--liTitleH)/2 0 0 calc(--liTitleH)/2 ) */
+    border-radius: calc( var(3rem)/2 0 0 calc(3rem)/2 )
 }
 
 .myUL .myLI .liTitle::before{
