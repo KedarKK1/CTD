@@ -1,0 +1,17 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: linear-gradient(to top right, #152238 0%, #152238 100%);
+}
+
+.contactUs{
+    color:white;
+}
+
+.myBorders{
+    /* border:2px solid white;
+    padding: 2px;
+    margin: 2px; */
+}
