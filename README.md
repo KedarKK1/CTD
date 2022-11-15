@@ -1,5 +1,5 @@
 # Event Screenshots
-<img src="./RC_screeenshots/ss1.png" alt="login_page" />
+<img src="./RC_screeenshots/ss1.png" />
 <img src="./RC_screeenshots/ss2.png" alt="login_page empty_username" />
 <img src="./RC_screeenshots/ss3.png" alt="login_page empty_password" />
 <img src="./RC_screeenshots/ss4.png" alt="login_page invalid credentials" />
