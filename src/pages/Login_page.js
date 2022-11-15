@@ -63,11 +63,11 @@ const Login_page = () => {
             };
 
             await axios(loginTimeConfig).then((res)=>{
-                // var now2 = new Date();
-                // console.log("before login - time.data.start_time", res.data.start_time);
-                // console.log("before login - time.data.now", Date.now());
-                // var isoDate = new Date(now2).toISOString()
-                // console.log("before login - new Date(now2).toISOString()", isoDate);
+                var now2 = new Date();
+                console.log("before login - time.data.start_time", res.data);
+                console.log("before login - time.data.now", Date.now());
+                var isoDate = new Date(now2).toISOString()
+                console.log("before login - new Date(now2).toISOString()", isoDate);
                 if((Date.now() - Date.parse(res.data.start_time))>0){
                     console.log("user can login as starttime has arrived", (Date.parse(res.data.start_time) - Date.now())/1000)
                     var raw = JSON.stringify(formValue);
